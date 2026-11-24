@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>🍁 逸祥一休尼京都狗勾｜2026 關西秋楓自由行</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍁</text></svg>" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Leaflet.js 地圖套件 (CDN) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+  <!-- Inter & Noto Sans TC 字體 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', '"Noto Sans TC"', 'sans-serif'],
+          },
+          colors: {
+            washi: '#FAF6F0',        // 溫暖和紙米白
+            slateDeep: '#2C221E',    // 深邃墨褐字色
+            maple: '#B8332A',        // 京都楓紅
+            mapleDark: '#962720',
+            ginkgo: '#D99B26',       // 暖金銀杏
+            ginkgoSoft: '#FEF3C7',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF6F0;
+      color: #2C221E;
+      -webkit-tap-highlight-color: transparent;
+      padding-bottom: 92px;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .glass-header {
+      background: rgba(250, 246, 240, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .bottom-nav {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 -4px 20px rgba(44, 34, 30, 0.08);
+    }
+
+    /* Leaflet 自訂標記樣式 */
+    .itinerary-pin {
+      background: #B8332A;
+      color: #ffffff;
+      border: 2.5px solid #ffffff;
+      border-radius: 9999px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+      box-shadow: 0 3px 8px rgba(184, 51, 42, 0.45);
+    }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF7F2;
+      color: #1E293B;
+      -webkit-tap-highlight-color: transparent;
+      padding-bottom: 92px;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .glass-header {
+      background: rgba(250, 247, 242, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .bottom-nav {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 -4px 20px rgba(30, 41, 59, 0.08);
+    }
+
+    /* Leaflet 自訂標記樣式 */
+    .itinerary-pin {
+      background: #C84B31;
+      color: #ffffff;
+      border: 2.5px solid #ffffff;
+      border-radius: 9999px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+      box-shadow: 0 3px 8px rgba(200, 75, 49, 0.45);
+    }
+    .pocket-pin {
+      background: #D99B26;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      border-radius: 9999px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      box-shadow: 0 2px 6px rgba(30, 41, 59, 0.3);
+    }
+    .search-pin {
+      background: #7C3AED;
+      color: #ffffff;
+      border: 2.5px solid #ffffff;
+      border-radius: 9999px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      box-shadow: 0 3px 10px rgba(124, 58, 237, 0.45);
+    }
+    .gps-pulse-wrapper {
+      position: relative;
+      width: 22px;
+      height: 22px;
+    }
+    .gps-pulse-dot {
+      position: absolute;
+      inset: 4px;
+      background: #2563EB;
+      border: 2.5px solid #ffffff;
+      border-radius: 9999px;
+      box-shadow: 0 0 6px rgba(37, 99, 235, 0.6);
+    }
+    .gps-pulse-ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 9999px;
+      background: rgba(37, 99, 235, 0.32);
+      animation: gpsPulse 1.8s infinite ease-out;
+    }
+    @keyframes gpsPulse {
+      0% { transform: scale(0.75); opacity: 0.9; }
+      100% { transform: scale(2.1); opacity: 0; }
+    }
+    .leaflet-popup-content-wrapper {
+      border-radius: 14px !important;
+      font-family: "Inter", "Noto Sans TC", sans-serif !important;
+    }
+    .leaflet-popup-content {
+      margin: 10px 12px !important;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-maple selection:text-white">
+
+  <!-- ==================== 頂部常駐 Header ==================== -->
+  <header class="sticky top-0 z-40 glass-header border-b border-stone-200/90">
+    <div class="max-w-3xl mx-auto px-3.5 py-2.5 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-maple to-ginkgo flex items-center justify-center text-white text-xl shadow-sm shrink-0">
+          🍁
+        </div>
+        <div class="min-w-0">
+          <h1 class="text-sm sm:text-base font-black tracking-tight text-slateDeep truncate">逸祥一休尼京都狗勾</h1>
+          <div class="flex items-center gap-1.5 text-[11px] text-stone-500">
+            <span class="truncate">11/26–12/1 關西秋楓自由行</span>
+            <span class="hidden sm:inline text-stone-300">·</span>
+            <span class="hidden sm:inline-flex items-center gap-1 text-maple font-bold font-mono">
+              🇯🇵 <span id="header-jst-clock-desktop">--:--</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 shrink-0">
+        <!-- 手機版日本時間小膠囊 -->
+        <div class="sm:hidden flex items-center gap-1 bg-red-50 border border-red-200 text-maple px-2 py-1 rounded-full text-[11px] font-extrabold font-mono">
+          <span>🇯🇵</span>
+          <span id="header-jst-clock-mobile">--:--</span>
+        </div>
+        <!-- 即時匯率膠囊（點擊開啟匯率與 10% 退稅換算視窗） -->
+        <button onclick="openCurrencyModal()" class="flex items-center gap-1 bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-950 px-2.5 py-1.5 rounded-full text-[11px] sm:text-xs font-extrabold transition shadow-xs">
+          <span>💴</span>
+          <span id="header-rate-pill">0.215</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 捷星 GK50 延誤連動警告橫幅 -->
+    <div id="flight-alert-banner" class="hidden bg-maple text-white text-xs px-4 py-2">
+      <div class="max-w-3xl mx-auto flex items-center justify-between gap-2">
+        <div class="flex items-center gap-1.5 min-w-0">
+          <span class="animate-pulse shrink-0">⚠️</span>
+          <span id="flight-alert-text" class="font-semibold truncate"></span>
+        </div>
+        <button onclick="switchTab('flight')" class="underline font-bold shrink-0">查看應變</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 主內容區域 ==================== -->
+  <main class="max-w-3xl mx-auto px-3.5 pt-3.5">
+
+    <!-- ==================== 分頁 1：行程表 ==================== -->
+    <section id="tab-itinerary" class="space-y-3.5">
+      <!-- 智慧時間控制列 -->
+      <div class="bg-white rounded-2xl p-3.5 shadow-xs border border-stone-200/90 space-y-2.5">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center gap-1 text-[11px] font-bold bg-red-50 text-maple px-2.5 py-1 rounded-full border border-red-200">
+              <span class="w-2 h-2 rounded-full bg-maple animate-pulse"></span>
+              日本時間 (UTC+9)
+            </span>
+            <span id="live-jst-clock" class="text-base font-extrabold font-mono text-slateDeep">--:--:--</span>
+          </div>
+          <button onclick="recalcDayFromNowJST()" class="bg-slateDeep hover:bg-slate-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition shadow-xs flex items-center gap-1">
+            <span>⚡</span>
+            <span>以現在(日本時間)重算</span>
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-stone-100 text-xs">
+          <div class="flex items-center gap-2">
+            <label for="day-start-time-input" class="font-bold text-stone-600">當日出發時間：</label>
+            <input type="time" id="day-start-time-input" onchange="onDayStartTimeChange()" class="rounded-lg border border-stone-300 bg-washi px-2.5 py-1 font-extrabold text-slateDeep focus:outline-none focus:border-maple" />
+          </div>
+          <div id="day-conflict-summary" class="text-[11px] font-bold"></div>
+        </div>
+      </div>
+
+      <!-- Day 1 ~ Day 6 切換列 -->
+      <div id="day-selector" class="flex gap-2 overflow-x-auto no-scrollbar pb-0.5"></div>
+
+      <!-- 當日總覽卡 -->
+      <div id="day-summary-card" class="bg-white rounded-2xl p-4 shadow-xs border border-stone-200/90"></div>
+
+      <!-- 動態時間軸與三種交通連接器 -->
+      <div id="itinerary-timeline" class="space-y-3"></div>
+
+      <!-- 底部快捷動作 -->
+      <div class="pt-2 pb-4 flex flex-wrap gap-2 justify-center">
+        <button onclick="switchTab('map')" class="flex items-center gap-1.5 bg-maple hover:bg-mapleDark text-white text-xs sm:text-sm font-bold px-4 py-2.5 rounded-xl shadow-xs transition">
+          <span>🗺️</span>
+          <span>在地圖看路線＆加附近景點</span>
+        </button>
+        <button onclick="exportItineraryText()" class="flex items-center gap-1.5 bg-white hover:bg-stone-100 text-stone-700 border border-stone-300 text-xs sm:text-sm font-semibold px-3.5 py-2.5 rounded-xl transition">
+          <span>📋</span>
+          <span>複製行程</span>
+        </button>
+        <button onclick="confirmResetModal()" class="flex items-center gap-1.5 bg-white hover:bg-red-50 text-stone-500 hover:text-maple border border-stone-200 text-xs sm:text-sm font-semibold px-3.5 py-2.5 rounded-xl transition">
+          <span>↺</span>
+          <span>重設預設</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== 分頁 2：地圖探索 (Leaflet + GPS + 即時搜尋) ==================== -->
+    <section id="tab-map" class="hidden space-y-3.5">
+      <!-- 搜尋並釘選任何日本景點 -->
+      <div class="bg-white rounded-2xl p-3.5 shadow-xs border border-stone-200/90 space-y-2.5">
+        <div class="flex items-center justify-between gap-2">
+          <h2 class="text-sm sm:text-base font-extrabold text-slateDeep flex items-center gap-1.5">
+            <span>🔎</span>
+            <span>搜尋日本／關西地點直接釘選到地圖</span>
+          </h2>
+          <span class="text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-200 px-2 py-0.5 rounded-full">即時搜尋</span>
+        </div>
+
+        <form onsubmit="handleMapPlaceSearch(event)" class="flex gap-2">
+          <input type="text" id="map-search-input" placeholder="輸入店名或景點" class="flex-1 rounded-xl border border-stone-300 px-3 py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-maple/25 focus:border-maple" />
+          <button type="submit" id="map-search-btn" class="bg-maple hover:bg-mapleDark text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-xl transition shrink-0">
+            搜尋
+          </button>
+        </form>
+
+        <!-- 搜尋結果下拉清單 -->
+        <div id="map-search-results" class="hidden space-y-1.5 pt-1 border-t border-stone-100"></div>
+      </div>
+
+      <!-- 地圖控制面板：GPS 定位、模擬位置、顯示篩選 -->
+      <div class="bg-white rounded-2xl p-3.5 shadow-xs border border-stone-200/90 space-y-2.5">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <button onclick="locateUserGPS()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-xs transition flex items-center gap-1.5">
+            <span>📍</span>
+            <span>定位目前位置</span>
+          </button>
+          <span id="gps-status-badge" class="text-[11px] font-bold text-stone-500 bg-stone-100 px-2.5 py-1 rounded-lg">
+            目前基準：Day 1 中心（可點定位或模擬）
+          </span>
+        </div>
+
+        <!-- 模擬關西位置（在台灣就能測試距離排序！） -->
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
+          <span class="text-[11px] font-bold text-stone-400 shrink-0">測試用模擬：</span>
+          <button onclick="setSimulatedLocation('京都車站', 34.9858, 135.7588)" class="shrink-0 text-[11px] font-bold px-2.5 py-1 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200">模擬：京都車站</button>
+          <button onclick="setSimulatedLocation('心齋橋', 34.6751, 135.5013)" class="shrink-0 text-[11px] font-bold px-2.5 py-1 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200">模擬：心齋橋</button>
+          <button onclick="setSimulatedLocation('嵐山', 35.0155, 135.6776)" class="shrink-0 text-[11px] font-bold px-2.5 py-1 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200">模擬：嵐山</button>
+          <button onclick="setSimulatedLocation('河原町', 35.0038, 135.7685)" class="shrink-0 text-[11px] font-bold px-2.5 py-1 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200">模擬：河原町</button>
+        </div>
+
+        <!-- 圖層與天數快速切換 -->
+        <div class="flex flex-wrap items-center justify-between gap-2 pt-1.5 border-t border-stone-100">
+          <div class="flex gap-1.5 text-[11px]">
+            <button onclick="setMapFilter('day_plus_nearby')" id="mf-day_plus_nearby" class="px-2.5 py-1 rounded-lg font-bold bg-maple text-white">當日行程＋附近口袋</button>
+            <button onclick="setMapFilter('day_only')" id="mf-day_only" class="px-2.5 py-1 rounded-lg font-bold bg-stone-100 text-stone-600">僅當日行程</button>
+            <button onclick="setMapFilter('all')" id="mf-all" class="px-2.5 py-1 rounded-lg font-bold bg-stone-100 text-stone-600">全部景點</button>
+          </div>
+          <select id="map-day-select" onchange="onMapDaySelect(this.value)" class="text-xs font-extrabold bg-washi border border-stone-300 rounded-lg px-2 py-1 text-slateDeep">
+            <option value="1">Day 1 (11/26)</option>
+            <option value="2">Day 2 (11/27)</option>
+            <option value="3">Day 3 (11/28)</option>
+            <option value="4">Day 4 (11/29)</option>
+            <option value="5">Day 5 (11/30)</option>
+            <option value="6">Day 6 (12/01)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Leaflet 互動地圖本體 -->
+      <div class="bg-white rounded-2xl p-1.5 shadow-xs border border-stone-200/90 relative">
+        <div id="leaflet-map" class="w-full h-[360px] sm:h-[430px] rounded-xl z-10"></div>
+        <!-- 圖例小標籤 -->
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-2 pb-1 text-[11px] text-stone-600 font-semibold">
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-maple inline-block"></span> 當日行程順序</span>
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-ginkgo inline-block"></span> 口袋名單景點</span>
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-blue-600 inline-block"></span> 目前/模擬位置</span>
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-purple-600 inline-block"></span> 搜尋釘選點</span>
+        </div>
+      </div>
+
+      <!-- 附近推薦 / 額外景點清單（依距離近到遠排序） -->
+      <div class="space-y-2.5">
+        <div class="flex items-center justify-between px-1">
+          <h3 class="text-sm sm:text-base font-extrabold text-slateDeep flex items-center gap-1.5">
+            <span>🧭</span>
+            <span>附近推薦 / 額外景點清單（依距離排序）</span>
+          </h3>
+          <span id="nearby-ref-label" class="text-[11px] font-bold text-maple"></span>
+        </div>
+        <div id="map-nearby-list" class="space-y-2.5"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 分頁 3：口袋名單 (87+ Google 地圖資料庫) ==================== -->
+    <section id="tab-saved" class="hidden space-y-3.5">
+      <div class="bg-white rounded-2xl p-4 shadow-xs border border-stone-200/90 space-y-3">
+        <div class="flex items-center justify-between gap-2">
+          <div>
+            <h2 class="text-base font-extrabold text-slateDeep flex items-center gap-1.5">
+              <span>📌</span>
+              <span>Google 地圖口袋名單庫</span>
+            </h2>
+            <p class="text-[11px] text-stone-500 mt-0.5">共收錄 <span id="saved-total-count" class="font-bold text-maple">0</span> 筆景點、美食與個人附註（支援地圖定位與一鍵排入）。</p>
+          </div>
+          <span id="saved-filtered-count" class="text-xs font-bold bg-stone-100 text-stone-600 px-2.5 py-1 rounded-lg shrink-0">0 筆</span>
+        </div>
+
+        <!-- 搜尋框 -->
+        <div class="relative">
+          <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 text-sm">🔍</span>
+          <input type="text" id="saved-search-input" oninput="renderSavedPlaces()" placeholder="搜尋店名或附註（如：喵喵、串串、可麗露、女鞋、鰻魚飯）..." class="w-full rounded-xl border border-stone-300 pl-9 pr-9 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-maple/25 focus:border-maple" />
+          <button onclick="clearSavedSearch()" id="saved-search-clear" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 text-sm font-bold">✕</button>
+        </div>
+
+        <!-- 區域快速篩選膠囊 -->
+        <div id="region-filter-pills" class="flex gap-1.5 overflow-x-auto no-scrollbar pb-0.5"></div>
+
+        <!-- 分類篩選與排序 -->
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div id="cat-filter-pills" class="flex gap-1.5 overflow-x-auto no-scrollbar"></div>
+          <select id="saved-sort-select" onchange="appState.savedSort = this.value; renderSavedPlaces();" class="text-xs font-bold bg-washi border border-stone-300 rounded-lg px-2.5 py-1.5 text-slateDeep">
+            <option value="distance">依距離近到遠</option>
+            <option value="rating">依評分高到低</option>
+          </select>
+        </div>
+
+        <!-- 區域快速篩選膠囊 -->
+        <div id="area-filter-pills" class="flex gap-1.5 overflow-x-auto no-scrollbar pt-0.5"></div>
+      </div>
+
+      <div id="saved-places-grid" class="grid grid-cols-1 gap-3"></div>
+    </section>
+
+    <!-- ==================== 分頁 4：航班動態 (捷星 GK50 & GK57) ==================== -->
+    <section id="tab-flight" class="hidden space-y-4">
+      <!-- 去程：捷星日本航空 GK50 -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-xs border border-stone-200/90 space-y-4">
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span class="bg-orange-500 text-white text-xs font-extrabold px-2.5 py-1 rounded-lg">去程 11/26 (四)</span>
+            <h2 class="text-sm sm:text-base font-extrabold text-slateDeep">捷星日本航空 GK50</h2>
+          </div>
+          <span id="outbound-status-badge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">準點 06:30</span>
+        </div>
+
+        <div class="bg-washi rounded-xl p-3 border border-stone-200/80 flex items-center justify-between text-center">
+          <div>
+            <div class="text-lg font-black text-slateDeep">TPE</div>
+            <div class="text-[11px] text-stone-500">桃園 T1 · 02:30</div>
+          </div>
+          <div class="flex-1 px-3 flex flex-col items-center">
+            <span class="text-[11px] font-extrabold text-orange-600">GK50 (JJP50)</span>
+            <div class="w-full border-t-2 border-dashed border-stone-300 my-1 relative">
+              <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-washi px-1 text-xs">✈️</span>
+            </div>
+            <span class="text-[10px] text-stone-400">直飛約 3 小時</span>
+          </div>
+          <div>
+            <div class="text-lg font-black text-maple">KIX</div>
+            <div class="text-[11px] text-stone-500">關西 T1 · <span id="out-est-arrive-small" class="font-bold text-slateDeep">06:30</span></div>
+          </div>
+        </div>
+
+        <!-- 去程延誤模擬滑桿 -->
+        <div class="bg-orange-50/80 rounded-xl p-3.5 border border-orange-200 space-y-2.5">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-stone-700">班機延誤模擬（自動連動 Day 1 行程）</span>
+            <span id="out-delay-label" class="font-extrabold text-maple">0 分鐘（準點）</span>
+          </div>
+          <input type="range" id="out-delay-slider" min="0" max="180" step="15" value="0" oninput="onOutboundDelayChange(this.value)" class="w-full accent-maple cursor-pointer" />
+          <div class="grid grid-cols-4 gap-1.5">
+            <button onclick="onOutboundDelayChange(0)" class="text-[11px] py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">準點</button>
+            <button onclick="onOutboundDelayChange(45)" class="text-[11px] py-1.5 rounded-lg bg-amber-50 text-amber-900 border border-amber-200 font-bold">+45 分</button>
+            <button onclick="onOutboundDelayChange(90)" class="text-[11px] py-1.5 rounded-lg bg-orange-100 text-orange-900 border border-orange-300 font-bold">+90 分</button>
+            <button onclick="onOutboundDelayChange(150)" class="text-[11px] py-1.5 rounded-lg bg-red-100 text-maple border border-red-300 font-bold">+150 分</button>
+          </div>
+        </div>
+
+        <div id="outbound-impact-box" class="rounded-xl p-3.5 border text-xs space-y-1.5"></div>
+
+        <div class="flex gap-2">
+          <a href="https://www.google.com/search?q=GK50+flight+status" target="_blank" rel="noopener" class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 rounded-xl transition">
+            🔍 Google 即時航班查詢
+          </a>
+          <a href="https://www.flightaware.com/live/flight/JJP50" target="_blank" rel="noopener" class="flex-1 text-center bg-slateDeep hover:bg-slate-700 text-white text-xs font-bold py-2.5 rounded-xl transition">
+            📡 FlightAware (JJP50)
+          </a>
+        </div>
+      </div>
+
+      <!-- 回程：捷星日本航空 GK57 -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-xs border border-stone-200/90 space-y-4">
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span class="bg-slateDeep text-white text-xs font-extrabold px-2.5 py-1 rounded-lg">回程 12/01 (二)</span>
+            <h2 class="text-sm sm:text-base font-extrabold text-slateDeep">捷星日本航空 GK57</h2>
+          </div>
+          <span id="inbound-status-badge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">表定 23:30</span>
+        </div>
+
+        <div class="bg-washi rounded-xl p-3 border border-stone-200/80 flex items-center justify-between text-center">
+          <div>
+            <div class="text-lg font-black text-maple">KIX</div>
+            <div class="text-[11px] text-stone-500">關西 T1 · <span id="in-est-dep-small" class="font-bold text-slateDeep">23:30</span></div>
+          </div>
+          <div class="flex-1 px-3 flex flex-col items-center">
+            <span class="text-[11px] font-extrabold text-orange-600">GK57 (JJP57)</span>
+            <div class="w-full border-t-2 border-dashed border-stone-300 my-1 relative">
+              <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-washi px-1 text-xs">✈️</span>
+            </div>
+            <span class="text-[10px] text-stone-400">深夜紅眼返台</span>
+          </div>
+          <div>
+            <div class="text-lg font-black text-slateDeep">TPE</div>
+            <div class="text-[11px] text-stone-500">桃園 T1 · 隔日凌晨</div>
+          </div>
+        </div>
+
+        <!-- 回程延誤模擬滑桿 -->
+        <div class="bg-stone-50 rounded-xl p-3.5 border border-stone-200 space-y-2.5">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-stone-700">回程延誤模擬（連動臨空城 Outlet 停留）</span>
+            <span id="in-delay-label" class="font-extrabold text-slateDeep">0 分鐘（準點）</span>
+          </div>
+          <input type="range" id="in-delay-slider" min="0" max="180" step="15" value="0" oninput="onInboundDelayChange(this.value)" class="w-full accent-slateDeep cursor-pointer" />
+          <div class="grid grid-cols-4 gap-1.5">
+            <button onclick="onInboundDelayChange(0)" class="text-[11px] py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">準點</button>
+            <button onclick="onInboundDelayChange(45)" class="text-[11px] py-1.5 rounded-lg bg-amber-50 text-amber-900 border border-amber-200 font-bold">+45 分</button>
+            <button onclick="onInboundDelayChange(90)" class="text-[11px] py-1.5 rounded-lg bg-orange-100 text-orange-900 border border-orange-300 font-bold">+90 分</button>
+            <button onclick="onInboundDelayChange(150)" class="text-[11px] py-1.5 rounded-lg bg-red-100 text-maple border border-red-300 font-bold">+150 分</button>
+          </div>
+        </div>
+
+        <div id="inbound-impact-box" class="rounded-xl p-3.5 border border-stone-200 bg-stone-50 text-xs text-stone-700 space-y-1.5"></div>
+
+        <div class="flex gap-2">
+          <a href="https://www.google.com/search?q=GK57+flight+status" target="_blank" rel="noopener" class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 rounded-xl transition">
+            🔍 Google 即時航班查詢
+          </a>
+          <a href="https://www.flightaware.com/live/flight/JJP57" target="_blank" rel="noopener" class="flex-1 text-center bg-slateDeep hover:bg-slate-700 text-white text-xs font-bold py-2.5 rounded-xl transition">
+            📡 FlightAware (JJP57)
+          </a>
+        </div>
+      </div>
+
+      <!-- 行李特工 (Luggage Porter) 快速檢查清單 -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-xs border border-amber-200/90 space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm sm:text-base font-extrabold text-slateDeep flex items-center gap-1.5">
+            <span>🧳</span>
+            <span>行李特工（Luggage Porter）寄件檢查表</span>
+          </h3>
+          <span class="text-[10px] font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full">時間紅線</span>
+        </div>
+        <div class="space-y-2 text-xs text-stone-700">
+          <label class="flex items-start gap-2.5 bg-washi p-2.5 rounded-xl border border-stone-200/80 cursor-pointer">
+            <input type="checkbox" id="chk-lp-1" onchange="saveChecklist()" class="mt-0.5 accent-maple w-4 h-4 rounded" />
+            <span><strong>去程 11/26 09:00（關西機場 T1）</strong>：吃完機場早餐後於 09:00 交寄大件行李直送「御宿野乃 京都七條」。</span>
+          </label>
+          <label class="flex items-start gap-2.5 bg-washi p-2.5 rounded-xl border border-stone-200/80 cursor-pointer">
+            <input type="checkbox" id="chk-lp-2" onchange="saveChecklist()" class="mt-0.5 accent-maple w-4 h-4 rounded" />
+            <span><strong>回程 12/01 09:00 前（京都飯店櫃檯）</strong>：退房後將行李交給御宿野乃櫃檯寄往關西機場（前一晚先確認寄件單）。</span>
+          </label>
+          <label class="flex items-start gap-2.5 bg-washi p-2.5 rounded-xl border border-stone-200/80 cursor-pointer">
+            <input type="checkbox" id="chk-lp-3" onchange="saveChecklist()" class="mt-0.5 accent-maple w-4 h-4 rounded" />
+            <span><strong>隨身物品必檢查</strong>：護照、錢包、行動電源（不可託運）與大容量可折疊購物袋（裝臨空城 Outlet 戰利品）務必留身邊！</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== 底部固定 4 分頁導覽列 ==================== -->
+  <nav class="fixed bottom-0 inset-x-0 z-50 bottom-nav border-t border-stone-200/90">
+    <div class="max-w-3xl mx-auto grid grid-cols-4 h-16">
+      <button onclick="switchTab('itinerary')" id="nav-itinerary" class="flex flex-col items-center justify-center gap-0.5 text-maple font-extrabold">
+        <span class="text-xl leading-none">🗓️</span>
+        <span class="text-[11px]">行程表</span>
+      </button>
+      <button onclick="switchTab('map')" id="nav-map" class="flex flex-col items-center justify-center gap-0.5 text-stone-500 hover:text-slateDeep font-medium">
+        <span class="text-xl leading-none">🗺️</span>
+        <span class="text-[11px]">地圖探索</span>
+      </button>
+      <button onclick="switchTab('saved')" id="nav-saved" class="flex flex-col items-center justify-center gap-0.5 text-stone-500 hover:text-slateDeep font-medium">
+        <span class="text-xl leading-none">📌</span>
+        <span class="text-[11px]">口袋名單</span>
+      </button>
+      <button onclick="switchTab('flight')" id="nav-flight" class="flex flex-col items-center justify-center gap-0.5 text-stone-500 hover:text-slateDeep font-medium">
+        <span class="text-xl leading-none">✈️</span>
+        <span class="text-[11px]">航班動態</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Toast 輕量提示 -->
+  <div id="toast-message" class="fixed top-16 left-1/2 -translate-x-1/2 z-[60] hidden bg-slateDeep text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg transition-opacity duration-300 max-w-[90vw] truncate"></div>
+
+  <!-- 通用 Modal 對話框（嚴禁使用瀏覽器 alert / confirm） -->
+  <div id="custom-modal" class="fixed inset-0 z-[70] hidden bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 shadow-xl space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between">
+        <h3 id="modal-title" class="text-base font-extrabold text-slateDeep"></h3>
+        <button onclick="closeModal()" class="text-stone-400 hover:text-stone-700 font-bold text-lg px-1">✕</button>
+      </div>
+      <div id="modal-body" class="text-xs text-stone-600 space-y-3"></div>
+      <div id="modal-actions" class="flex justify-end gap-2 pt-1"></div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. 完整 78+ 筆 Google 地圖口袋名單資料庫（含精準經緯度與個人附註）
+    // =========================================================================
+    const CAT_LABELS = ["全部", "景點/寺社", "美食/燒肉/拉麵", "咖啡/甜點", "購物/車站"];
+    const AREA_GROUPS = ["全部區域", "大阪", "京都東山/祇園", "京都河原町", "京都嵐山", "京都車站/洛北", "宇治/奈良", "臨空城/勝尾寺"];
+
+    const DEFAULT_POCKET_PLACES = [
+      // 大阪心齋橋 / 難波 / 機場周邊
+      { id: "p01", name: "新宿燒肉 牛舌的檸檬 大阪本店", area: "大阪難波", cat: "美食/燒肉/拉麵", lat: 34.6664, lng: 135.5037, rating: 4.9, price: "¥3,000-5,000", note: "11/26 12:00 已預約厚切牛舌", bestDay: 1 },
+      { id: "p02", name: "Daimaru Shinsaibashi（大丸心齋橋）", area: "大阪心齋橋", cat: "購物/車站", lat: 34.6733, lng: 135.5011, rating: 4.1, price: "", note: "女鞋5f 男鞋6f 退稅9f", bestDay: 1 },
+      { id: "p03", name: "HOKA 大阪心齋橋店", area: "大阪心齋橋", cat: "購物/車站", lat: 34.6752, lng: 135.5008, rating: 4.9, price: "", note: "試穿 HOKA 直接換新鞋", bestDay: 1 },
+      { id: "p04", name: "御堂筋銀杏大道 (Mido-Suji)", area: "大阪心齋橋", cat: "景點/寺社", lat: 34.6780, lng: 135.5003, rating: 4.5, price: "", note: "17:00 夜間銀杏點燈", bestDay: 1 },
+      { id: "p05", name: "難波八阪神社", area: "大阪難波", cat: "景點/寺社", lat: 34.6614, lng: 135.4966, rating: 4.5, price: "", note: "震撼巨大獅子頭殿", bestDay: 1 },
+      { id: "p06", name: "黑門市場", area: "大阪難波", cat: "購物/車站", lat: 34.6656, lng: 135.5065, rating: 4.1, price: "", note: "大阪廚房海鮮市場", bestDay: 1 },
+      { id: "p07", name: "CANELÉ du JAPON 長堀橋店", area: "大阪心齋橋", cat: "咖啡/甜點", lat: 34.6745, lng: 135.5063, rating: 4.3, price: "", note: "長堀橋人氣迷你可麗露", bestDay: 1 },
+      { id: "p08", name: "Cross飯店 大阪", area: "大阪難波", cat: "購物/車站", lat: 34.6698, lng: 135.5009, rating: 4.5, price: "", note: "草莓蛋糕可麗路", bestDay: 1 },
+      { id: "p09", name: "Strawberry Mania 道頓堀店", area: "大阪難波", cat: "咖啡/甜點", lat: 34.6687, lng: 135.5022, rating: 4.0, price: "¥1,000-2,000", note: "道頓堀人氣草莓甜點", bestDay: 1 },
+      { id: "p10", name: "Nishiya（西家烏龍麵 心齋橋）", area: "大阪心齋橋", cat: "美食/燒肉/拉麵", lat: 34.6725, lng: 135.5024, rating: 4.1, price: "¥1,000-2,000", note: "老字號烏龍麵火鍋", bestDay: 1 },
+      { id: "p11", name: "Melt Chocolate", area: "大阪難波", cat: "咖啡/甜點", lat: 34.6716, lng: 135.4979, rating: 3.9, price: "", note: "濃郁巧克力咖啡館", bestDay: 1 },
+      { id: "p12", name: "大鳥大社", area: "大阪堺市", cat: "景點/寺社", lat: 34.5369, lng: 135.4606, rating: 4.4, price: "", note: "11/26 早上參拜・透明御守", bestDay: 1 },
+      { id: "p13", name: "Harukas300展望台", area: "大阪天王寺", cat: "景點/寺社", lat: 34.6463, lng: 135.5133, rating: 4.6, price: "", note: "阿倍野高空夜景", bestDay: 1 },
+      { id: "p14", name: "大阪城公園", area: "大阪城", cat: "景點/寺社", lat: 34.6873, lng: 135.5262, rating: 4.4, price: "", note: "天守閣與大片銀杏林", bestDay: 1 },
+      { id: "p15", name: "Hanadako（はなだこ 梅田）", area: "大阪梅田", cat: "美食/燒肉/拉麵", lat: 34.7031, lng: 135.4991, rating: 4.2, price: "¥1-1,000", note: "章魚燒！", bestDay: 1 },
+      { id: "p16", name: "Okoppe Milk Stand 阪神梅田", area: "大阪梅田", cat: "咖啡/甜點", lat: 34.7005, lng: 135.4985, rating: 3.9, price: "", note: "北海道濃厚霜淇淋", bestDay: 1 },
+      { id: "p17", name: "grenier 梅田店", area: "大阪梅田", cat: "咖啡/甜點", lat: 34.7026, lng: 135.5008, rating: 4.5, price: "", note: "超人氣烤布蕾千層酥", bestDay: 1 },
+      { id: "p18", name: "RIKIchan Charcoal-grilled beef", area: "大阪梅田", cat: "美食/燒肉/拉麵", lat: 34.7039, lng: 135.4961, rating: 4.5, price: "超過 ¥10,000", note: "黑毛和牛菲力專門店", bestDay: 1 },
+      { id: "p19", name: "勝尾寺", area: "大阪箕面", cat: "景點/寺社", lat: 34.8658, lng: 135.4910, rating: 4.6, price: "¥500", note: "12/1 滿山達摩與紅葉", bestDay: 6 },
+      { id: "p20", name: "臨空城站（りんくうタウン駅）", area: "臨空城/機場", cat: "購物/車站", lat: 34.4114, lng: 135.2995, rating: 4.1, price: "", note: "距關西機場僅 1 站 6 分鐘", bestDay: 6 },
+      { id: "p21", name: "りんくうプレミアム・アウトレット（臨空城 Outlet）", area: "臨空城/機場", cat: "購物/車站", lat: 34.4071, lng: 135.2939, rating: 4.1, price: "", note: "12/1 下午血拼＆海景晚餐", bestDay: 6 },
+
+      // 京都東山 / 清水 / 祇園 / 伏見
+      { id: "p22", name: "清水寺", area: "京都東山", cat: "景點/寺社", lat: 34.9949, lng: 135.7850, rating: 4.6, price: "¥500", note: "11/27 06:00 清晨無人空景", bestDay: 2 },
+      { id: "p23", name: "產寧坂（三年坂）", area: "京都東山", cat: "景點/寺社", lat: 34.9973, lng: 135.7808, rating: 4.4, price: "", note: "經典石板古街", bestDay: 2 },
+      { id: "p24", name: "二年坂 (Ninen Zaka Path)", area: "京都東山", cat: "景點/寺社", lat: 34.9981, lng: 135.7807, rating: 4.5, price: "", note: "町家古街與八坂塔遠景", bestDay: 2 },
+      { id: "p25", name: "璃光和服 清水店 (Riko Kimono)", area: "京都東山", cat: "購物/車站", lat: 34.9985, lng: 135.7793, rating: 5.0, price: "", note: "11/27 08:30 已預約", bestDay: 2 },
+      { id: "p26", name: "八坂庚申堂", area: "京都東山", cat: "景點/寺社", lat: 34.9983, lng: 135.7784, rating: 4.3, price: "", note: "七彩束縛猿布猴拍照牆", bestDay: 2 },
+      { id: "p27", name: "伏見稻荷大社", area: "京都伏見", cat: "景點/寺社", lat: 34.9671, lng: 135.7727, rating: 4.6, price: "", note: "11/27 穿和服搭計程車拍千本鳥居", bestDay: 2 },
+      { id: "p28", name: "花見小路 (Hanamikoji Street)", area: "京都祇園", cat: "景點/寺社", lat: 35.0021, lng: 135.7751, rating: 4.4, price: "", note: "傳統茶屋花街散步", bestDay: 2 },
+      { id: "p29", name: "八坂神社本殿", area: "京都祇園", cat: "景點/寺社", lat: 35.0037, lng: 135.7785, rating: 4.4, price: "", note: "祇園地標神社", bestDay: 2 },
+      { id: "p30", name: "建仁寺", area: "京都祇園", cat: "景點/寺社", lat: 35.0010, lng: 135.7736, rating: 4.5, price: "¥800", note: "震撼雙龍圖與枯山水庭園", bestDay: 2 },
+      { id: "p31", name: "Hatoya Ryoyousha Kiyomizu（八十八良葉舍）", area: "京都東山", cat: "咖啡/甜點", lat: 34.9963, lng: 135.7805, rating: 4.5, price: "", note: "職人手刷濃厚抹茶拿鐵", bestDay: 2 },
+      { id: "p32", name: "GOKAGO", area: "京都東山", cat: "咖啡/甜點", lat: 34.9977, lng: 135.7805, rating: 4.5, price: "¥1,000-2,000", note: "二三年坂質感抹茶專賣", bestDay: 2 },
+      { id: "p33", name: "GION GOZU 四条店", area: "京都祇園", cat: "咖啡/甜點", lat: 35.0035, lng: 135.7745, rating: 4.6, price: "", note: "祇園質感西點伴手禮", bestDay: 2 },
+      { id: "p34", name: "南禪寺", area: "京都東山北", cat: "景點/寺社", lat: 35.0112, lng: 135.7937, rating: 4.5, price: "", note: "11/29 紅磚水路閣紅葉", bestDay: 4 },
+      { id: "p35", name: "永觀堂（禪林寺）", area: "京都東山北", cat: "景點/寺社", lat: 35.0144, lng: 135.7955, rating: 4.6, price: "¥1,000", note: "11/29 京都紅葉之王", bestDay: 4 },
+      { id: "p36", name: "Pizzeria Napoletana Da Yuki", area: "京都東山北", cat: "美食/燒肉/拉麵", lat: 35.0110, lng: 135.7824, rating: 4.4, price: "¥2,000-6,000", note: "平安神宮旁人氣窯烤披薩", bestDay: 4 },
+      { id: "p37", name: "醍醐寺", area: "京都伏見", cat: "景點/寺社", lat: 34.9510, lng: 135.8195, rating: 4.4, price: "¥1,000", note: "世界遺產弁天堂水池紅葉", bestDay: 5 },
+
+      // 京都河原町 / 三條 / 市中心
+      { id: "p38", name: "三嶋亭 本店", area: "京都河原町", cat: "美食/燒肉/拉麵", lat: 35.0086, lng: 135.7672, rating: 4.2, price: "超過 ¥10,000", note: "11/29 13:00 已預約壽喜燒", bestDay: 4 },
+      { id: "p39", name: "here 京都", area: "京都河原町", cat: "咖啡/甜點", lat: 35.0089, lng: 135.7568, rating: 4.1, price: "¥1,000-2,000", note: "可麗露 咖啡 必點", bestDay: 4 },
+      { id: "p40", name: "葱屋にょろ助 先斗町店", area: "京都河原町", cat: "美食/燒肉/拉麵", lat: 35.0053, lng: 135.7709, rating: 4.2, price: "¥4,000-8,000", note: "鰻魚飯", bestDay: 2 },
+      { id: "p41", name: "Sumibi Yakitori Kibitaki（炭火燒鳥）", area: "京都河原町", cat: "美食/燒肉/拉麵", lat: 35.0046, lng: 135.7641, rating: 4.7, price: "¥4,000-8,000", note: "好ㄘ串串", bestDay: 4 },
+      { id: "p42", name: "麵屋 豬一", area: "京都河原町", cat: "美食/燒肉/拉麵", lat: 35.0017, lng: 135.7669, rating: 4.4, price: "¥2,000-3,000", note: "米其林必比登清湯拉麵", bestDay: 4 },
+      { id: "p43", name: "Nanaya Kyoto Sanjo Shop（ななや）", area: "京都河原町", cat: "咖啡/甜點", lat: 35.0089, lng: 135.7652, rating: 4.5, price: "", note: "世界最濃 7 號抹茶義式冰淇淋", bestDay: 4 },
+      { id: "p44", name: "YUGEN", area: "京都河原町", cat: "咖啡/甜點", lat: 35.0031, lng: 135.7634, rating: 4.5, price: "¥1,000-2,000", note: "質感日本茶體驗空間", bestDay: 4 },
+      { id: "p45", name: "Wagyu Steak Hafuu Honten（はふう 本店）", area: "京都河原町", cat: "美食/燒肉/拉麵", lat: 35.0149, lng: 135.7638, rating: 4.5, price: "", note: "招牌極品和牛炸牛排三明治", bestDay: 4 },
+      { id: "p46", name: "Ito Okashi（いとおかし）", area: "京都河原町", cat: "美食/燒肉/拉麵", lat: 35.0015, lng: 135.7629, rating: 4.5, price: "¥2,000-3,000", note: "高人氣精緻日式早餐", bestDay: 4 },
+      { id: "p47", name: "Ijou Maru Parfait", area: "京都河原町", cat: "咖啡/甜點", lat: 35.0044, lng: 135.7681, rating: 4.0, price: "¥5,000-6,000", note: "奢華季節水果聖代", bestDay: 4 },
+      { id: "p48", name: "Taiho RAMEN PLACE - Kiyamachi", area: "京都河原町", cat: "美食/燒肉/拉麵", lat: 35.0063, lng: 135.7704, rating: 4.2, price: "¥1,000-2,000", note: "木屋町人氣醬油拉麵", bestDay: 4 },
+      { id: "p49", name: "Cocktail Stand FUREK", area: "京都河原町", cat: "咖啡/甜點", lat: 35.0058, lng: 135.7707, rating: 4.9, price: "¥2,000-6,000", note: "超高評價創意調酒吧", bestDay: 4 },
+      { id: "p50", name: "魚々鶏夜", area: "京都河原町", cat: "美食/燒肉/拉麵", lat: 35.0028, lng: 135.7676, rating: 4.4, price: "¥3,000-7,000", note: "海鮮與雞肉料理居酒屋", bestDay: 4 },
+      { id: "p51", name: "鴨川（四條大橋河畔）", area: "京都河原町", cat: "景點/寺社", lat: 35.0038, lng: 135.7717, rating: 4.6, price: "", note: "京都最美河岸散步", bestDay: 2 },
+
+      // 京都嵐山 / 嵯峨野 / 龜岡
+      { id: "p52", name: "嵯峨野嵐山小火車（小火車嵯峨站）", area: "京都嵐山", cat: "景點/寺社", lat: 35.0185, lng: 135.6813, rating: 4.3, price: "¥880", note: "11/28 18:59 富貴車廂終點", bestDay: 3 },
+      { id: "p53", name: "嵐山竹林小徑", area: "京都嵐山", cat: "景點/寺社", lat: 35.0168, lng: 135.6713, rating: 4.2, price: "", note: "必拍高聳竹林隧道", bestDay: 3 },
+      { id: "p54", name: "渡月橋", area: "京都嵐山", cat: "景點/寺社", lat: 35.0129, lng: 135.6778, rating: 4.5, price: "", note: "嵐山最經典地標與秋山倒影", bestDay: 3 },
+      { id: "p55", name: "野宮神社", area: "京都嵐山", cat: "景點/寺社", lat: 35.0177, lng: 135.6742, rating: 4.4, price: "", note: "竹林內靈驗結緣神社", bestDay: 3 },
+      { id: "p56", name: "二尊院", area: "京都嵐山", cat: "景點/寺社", lat: 35.0218, lng: 135.6683, rating: 4.4, price: "¥500", note: "寬闊紅葉馬場參道", bestDay: 3 },
+      { id: "p57", name: "祇王寺", area: "京都嵐山", cat: "景點/寺社", lat: 35.0247, lng: 135.6672, rating: 4.5, price: "¥300", note: "絕美紅楓綠苔秘境", bestDay: 3 },
+      { id: "p58", name: "大覺寺", area: "京都嵐山", cat: "景點/寺社", lat: 35.0282, lng: 135.6778, rating: 4.4, price: "¥500", note: "大澤池紅葉與古塔倒影", bestDay: 3 },
+      { id: "p59", name: "嵐山商店街", area: "京都嵐山", cat: "購物/車站", lat: 35.0155, lng: 135.6776, rating: 4.7, price: "", note: "伴手禮與小吃一條街", bestDay: 3 },
+      { id: "p60", name: "Kameyamaya（龜山家）", area: "京都嵐山", cat: "美食/燒肉/拉麵", lat: 35.0144, lng: 135.6743, rating: 4.5, price: "¥1,000-2,000", note: "桂川畔京都風味定食", bestDay: 3 },
+      { id: "p61", name: "% ARABICA 京都嵐山店", area: "京都嵐山", cat: "咖啡/甜點", lat: 35.0138, lng: 135.6766, rating: 4.2, price: "¥1-1,000", note: "渡月橋旁必喝拿鐵", bestDay: 3 },
+      { id: "p62", name: "保津川遊船（保津川漂流）", area: "京都嵐山", cat: "景點/寺社", lat: 35.0135, lng: 135.6725, rating: 4.6, price: "", note: "峽谷賞楓木船體驗", bestDay: 3 },
+      { id: "p63", name: "梅宮大社", area: "京都右京", cat: "景點/寺社", lat: 35.0044, lng: 135.7029, rating: 4.1, price: "", note: "喵喵", bestDay: 3 },
+      { id: "p64", name: "鍬山神社", area: "京都龜岡", cat: "景點/寺社", lat: 35.0067, lng: 135.5681, rating: 4.2, price: "", note: "龜岡在地爆紅賞楓秘境", bestDay: 3 },
+
+      // 京都車站 / 七條 / 洛北 / 貴船
+      { id: "p65", name: "御宿野乃 京都七條", area: "京都車站", cat: "購物/車站", lat: 34.9896, lng: 135.7621, rating: 4.5, price: "", note: "本趟連住 5 晚溫泉飯店", bestDay: 1 },
+      { id: "p66", name: "HOHO HOJICHA 京都駅八条口店", area: "京都車站", cat: "咖啡/甜點", lat: 34.9844, lng: 135.7597, rating: 4.7, price: "¥1-1,000", note: "宇治焙茶外帶專賣", bestDay: 5 },
+      { id: "p67", name: "JR 京都伊勢丹", area: "京都車站", cat: "購物/車站", lat: 34.9858, lng: 135.7577, rating: 4.0, price: "", note: "京都車站共構百貨", bestDay: 4 },
+      { id: "p68", name: "AEON MALL KYOTO", area: "京都車站", cat: "購物/車站", lat: 34.9822, lng: 135.7545, rating: 4.0, price: "", note: "車站南口大型購物中心", bestDay: 4 },
+      { id: "p69", name: "東寺（教王護國寺）", area: "京都車站", cat: "景點/寺社", lat: 34.9806, lng: 135.7478, rating: 4.5, price: "¥800", note: "五重塔與秋季夜間點燈", bestDay: 4 },
+      { id: "p70", name: "京都水族館", area: "京都車站", cat: "景點/寺社", lat: 34.9875, lng: 135.7477, rating: 4.2, price: "", note: "梅小路公園人氣水族館", bestDay: 4 },
+      { id: "p71", name: "下鴨神社（賀茂御祖神社）", area: "京都洛北", cat: "景點/寺社", lat: 35.0391, lng: 135.7730, rating: 4.5, price: "", note: "世界遺產糺之森", bestDay: 4 },
+      { id: "p72", name: "出町桝形商店街", area: "京都洛北", cat: "購物/車站", lat: 35.0303, lng: 135.7694, rating: 4.2, price: "", note: "出町柳旁在地市場與豆餅", bestDay: 4 },
+      { id: "p73", name: "北野天滿宮", area: "京都洛北", cat: "景點/寺社", lat: 35.0312, lng: 135.7351, rating: 4.5, price: "", note: "御土居紅葉苑絕景", bestDay: 4 },
+      { id: "p74", name: "金閣寺 (Kinkaku-ji)", area: "京都洛北", cat: "景點/寺社", lat: 35.0394, lng: 135.7292, rating: 4.6, price: "¥500", note: "金色舍利殿與鏡湖池", bestDay: 4 },
+      { id: "p75", name: "貴船口（叡山電車）", area: "京都貴船", cat: "購物/車站", lat: 35.1072, lng: 135.7644, rating: 4.2, price: "", note: "叡山鞍馬", bestDay: 4 },
+      { id: "p76", name: "楓葉隧道（叡山電車 市原-二之瀨）", area: "京都貴船", cat: "景點/寺社", lat: 35.0955, lng: 135.7615, rating: 4.4, price: "", note: "16:30 後車廂熄燈慢行", bestDay: 4 },
+
+      // 宇治 / 奈良
+      { id: "p77", name: "中村藤吉本店 宇治本店", area: "宇治", cat: "咖啡/甜點", lat: 34.8902, lng: 135.8012, rating: 4.4, price: "¥2,000-3,000", note: "11/30 08:50 抽號碼牌吃竹筒聖代", bestDay: 5 },
+      { id: "p78", name: "Hoho Hojicha 宇治本店", area: "宇治", cat: "咖啡/甜點", lat: 34.8906, lng: 135.8049, rating: 4.0, price: "¥1,000-2,000", note: "宇治焙茶專門本店", bestDay: 5 },
+      { id: "p79", name: "茶廣場森半 藏咖啡", area: "宇治", cat: "咖啡/甜點", lat: 34.9001, lng: 135.7988, rating: 4.5, price: "¥1,000-2,000", note: "百年老舖倉庫咖啡廳", bestDay: 5 }
+    ];
+
+    // =========================================================================
+    // 2. 六天五夜定案行程（含每一站精準經緯度）
+    // =========================================================================
+    const DEFAULT_ITINERARY = [
+      {
+        day: 1,
+        date: "11/26 (四)",
+        startTime: "06:30",
+        title: "關西機場早餐 ➔ 大鳥大社 ➔ 12:00 牛舌的檸檬 ➔ 心齋橋買鞋＆銀杏",
+        summary: "捷星 GK50 06:30 抵關西機場吃早餐等 09:00 行李特工，順路參拜大鳥大社、12:00 吃厚切牛舌，下午心齋橋買 On/HOKA 新鞋與賞銀杏。",
+        stops: [
+          {
+            id: "d1-1", name: "關西機場(KIX)入境＆早餐", query: "Kansai International Airport Terminal 1",
+            lat: 34.4320, lng: 135.2304, stayMins: 140, lockedTime: null, tag: "捷星 GK50 抵達",
+            note: "入境通關後至 T1 2F/3F 吃神座拉麵、すき家或咖啡早餐，悠閒等到 09:00 寄行李。",
+            transportMode: "transit", customTransit: null
+          },
+          {
+            id: "d1-2", name: "行李特工寄件（直送京都御宿野乃）", query: "Kansai International Airport Terminal 1",
+            lat: 34.4325, lng: 135.2310, stayMins: 15, lockedTime: "09:00", tag: "📌 09:00 寄件",
+            note: "將大件行李交寄直送御宿野乃，兩手空空輕裝玩大阪！",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 5, cost: 0, desc: "航廈內步行至行李特工指定櫃檯。" }, transit: { mins: 5, cost: 0, desc: "航廈內步行即可。" }, taxi: { mins: 5, cost: 0, desc: "航廈內步行即可。" } }
+          },
+          {
+            id: "d1-3", name: "大鳥大社（JR 鳳站）", query: "大鳥大社 堺市",
+            lat: 34.5369, lng: 135.4606, stayMins: 65, lockedTime: null, tag: "透明御守",
+            note: "社務所 09:00 開門，必求「看透未來的透明御守」與勝運籤。",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 35, cost: 500, desc: "搭 JR 關空快速（26分）直達 JR 鳳站，西口步行 8 分鐘。" }, taxi: { mins: 32, cost: 10500, desc: "走阪神高速直達，JR 更省時划算。" } }
+          },
+          {
+            id: "d1-4", name: "新宿燒肉 牛舌的檸檬 大阪本店", query: "新宿焼肉 牛たんの檸檬 大阪本店",
+            lat: 34.6664, lng: 135.5037, stayMins: 90, lockedTime: "12:00", tag: "📌 已預約 12:00",
+            note: "準時報到享用招牌厚切炭烤牛舌定食與山藥泥麥飯！",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 35, cost: 480, desc: "JR 鳳站搭阪和線至天王寺轉御堂筋線至難波站，步行 6 分。" }, taxi: { mins: 28, cost: 5800, desc: "若大鳥大社逛太晚，搭計程車直達餐廳最保險。" } }
+          },
+          {
+            id: "d1-5", name: "大丸心齋橋＆HOKA心齋橋買鞋", query: "HOKA Osaka Shinsaibashi",
+            lat: 34.6745, lng: 135.5010, stayMins: 110, lockedTime: null, tag: "買新鞋直接穿",
+            note: "女鞋5F 男鞋6F 退稅9F（大丸逛 On 昂跑）；步行 3 分逛 HOKA 旗艦店直接換穿新鞋！",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 12, cost: 0, desc: "穿過道頓堀戎橋往北散步即達心齋橋商圈。" }, transit: { mins: 10, cost: 190, desc: "御堂筋線難波坐 1 站至心齋橋。" }, taxi: { mins: 6, cost: 900, desc: "市區單行道多，步行最快。" } }
+          },
+          {
+            id: "d1-6", name: "御堂筋銀杏大道＆難波神社", query: "難波神社 大阪",
+            lat: 34.6813, lng: 135.5002, stayMins: 90, lockedTime: null, tag: "17:00 銀杏點燈",
+            note: "沿御堂筋往北賞 400 年大銀杏與 17:00 夜間彩燈，一路散步往梅田搭車。",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 9, cost: 0, desc: "沿御堂筋銀杏大道往北散步 9 分鐘即達難波神社。" }, transit: { mins: 8, cost: 190, desc: "搭御堂筋線坐 1 站至本町站。" }, taxi: { mins: 5, cost: 800, desc: "散步拍照最推薦。" } }
+          },
+          {
+            id: "d1-7", name: "御宿野乃 京都七條 Check-in", query: "Onyado Nono Kyotoshichijo",
+            lat: 34.9896, lng: 135.7621, stayMins: 30, lockedTime: null, tag: "連住 5 晚溫泉",
+            note: "從 JR 大阪站搭 JR 新快速（29 分，每 15 分一班）直達京都站，步行 7 分領行李泡湯。",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 48, cost: 580, desc: "梅田 JR 大阪站搭京都線新快速（29 分）直達京都站，步行 7 分。" }, taxi: { mins: 55, cost: 17500, desc: "跨府移動，JR 新快速最快最省。" } }
+          }
+        ]
+      },
+      {
+        day: 2,
+        date: "11/27 (五)",
+        startTime: "05:45",
+        title: "清水寺清晨空景 ➔ 08:30 璃光和服＋伏見稻荷 ➔ 祇園（或貴船夜楓）",
+        summary: "05:45 搭計程車搶拍無人清水寺，08:30 換和服搭計程車拍伏見稻荷千本鳥居，下午漫步祇園花見小路／白川或機動去貴船。",
+        stops: [
+          {
+            id: "d2-0", name: "御宿野乃 京都七條出發", query: "Onyado Nono Kyotoshichijo",
+            lat: 34.9896, lng: 135.7621, stayMins: 5, lockedTime: null, tag: "清晨出發",
+            note: "飯店門口直接叫計程車直達清水寺仁王門前，省下爬五條坂陡坡的體力！",
+            transportMode: "walk", customTransit: null
+          },
+          {
+            id: "d2-1", name: "清水寺清晨空景＆二三年坂", query: "清水寺 京都",
+            lat: 34.9949, lng: 135.7850, stayMins: 140, lockedTime: null, tag: "06:00 開門",
+            note: "06:00 開門第一批進場（06:42 日出），拍完清水舞台後順坡走三年坂、二年坂下來。",
+            transportMode: "taxi",
+            customTransit: { taxi: { mins: 10, cost: 1200, desc: "05:45 門口上車 10 分鐘直達清水寺，最省力！" }, transit: { mins: 28, cost: 160, desc: "京阪七條搭至清水五條，需爬坡步行 18 分。" } }
+          },
+          {
+            id: "d2-2", name: "璃光和服 清水店", query: "Riko Kimono Rental Kiyomizu Store",
+            lat: 34.9985, lng: 135.7793, stayMins: 60, lockedTime: "08:30", tag: "📌 已預約 08:30",
+            note: "換裝與盤髮約 60 分鐘；選白、米、淺粉、水藍等亮色系拍紅鳥居最搶眼。",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 8, cost: 0, desc: "順著二年坂石板路步行至八坂塔旁即達。" }, transit: { mins: 8, cost: 0, desc: "古街徒步區步行即達。" }, taxi: { mins: 8, cost: 0, desc: "古街徒步區步行即可。" } }
+          },
+          {
+            id: "d2-3", name: "八坂庚申堂＆八坂塔", query: "八坂庚申堂 京都",
+            lat: 34.9983, lng: 135.7784, stayMins: 55, lockedTime: null, tag: "和服速拍",
+            note: "步行 3 分鐘拍七彩束縛猿布猴背景牆與八坂塔經典轉角。",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 3, cost: 0, desc: "就在璃光旁邊轉角，步行 3 分鐘。" }, transit: { mins: 3, cost: 0, desc: "步行即達。" }, taxi: { mins: 3, cost: 0, desc: "僅 150 公尺。" } }
+          },
+          {
+            id: "d2-4", name: "伏見稻荷大社千本鳥居", query: "伏見稻荷大社",
+            lat: 34.9671, lng: 135.7727, stayMins: 85, lockedTime: null, tag: "計程車直達",
+            note: "穿和服走千本鳥居，過奧社奉拜所再往上走一小段人潮少一半拍完即折返。",
+            transportMode: "taxi",
+            customTransit: { taxi: { mins: 18, cost: 2000, desc: "東大路通攔計程車直達鳥居前，保護和服妝髮最划算！" }, transit: { mins: 32, cost: 220, desc: "需走 15 分至京阪站搭車轉乘。" } }
+          },
+          {
+            id: "d2-5", name: "祇園午餐＆歸還和服", query: "Hanamikoji Street Gion walk",
+            lat: 35.0021, lng: 135.7751, stayMins: 100, lockedTime: null, tag: "換回球鞋",
+            note: "搭計程車回祇園吃午餐，接著走回璃光歸還和服換回舒服球鞋！",
+            transportMode: "taxi",
+            customTransit: { taxi: { mins: 16, cost: 1900, desc: "鳥居口搭計程車直達祇園花見小路。" }, transit: { mins: 24, cost: 220, desc: "京阪伏見稻荷站搭至祇園四條站。" } }
+          },
+          {
+            id: "d2-6", name: "祇園花見小路／白川散步（或改去貴船夜楓）", query: "祇園白川 巽橋",
+            lat: 35.0056, lng: 135.7734, stayMins: 120, lockedTime: null, tag: "彈性慢活",
+            note: "【輕鬆版】漫步白川巽橋、喝抹茶、先斗町吃鰻魚飯。【夜楓版】若體力佳可 15:15 從出町柳搭 KIRARA 上貴船（末班下山公車 17:38）。",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 8, cost: 0, desc: "從花見小路散步至白川與鴨川。" }, transit: { mins: 45, cost: 700, desc: "若改衝貴船：京阪至出町柳轉叡山電車至貴船口。" }, taxi: { mins: 5, cost: 700, desc: "祇園周邊步行最舒服。" } }
+          }
+        ]
+      },
+      {
+        day: 3,
+        date: "11/28 (六)",
+        startTime: "08:30",
+        title: "嵐山全天楓紅漫步 ➔ 18:59 嵯峨野小火車 5 號富貴車廂",
+        summary: "白天悠閒逛嵐山竹林、彈性挑寺院與渡月橋；傍晚 17:45 回站拿厚外套，搭 18:02 JR 普通車至馬堀轉乘 18:59 點燈富貴號！",
+        stops: [
+          {
+            id: "d3-0", name: "御宿野乃 京都七條出發", query: "Onyado Nono Kyotoshichijo",
+            lat: 34.9896, lng: 135.7621, stayMins: 5, lockedTime: null, tag: "帶上晚間厚外套",
+            note: "出門記得帶羽絨外套、毛帽、圍巾與暖暖包，到了嵐山先鎖車站置物櫃！",
+            transportMode: "walk", customTransit: null
+          },
+          {
+            id: "d3-1", name: "JR嵯峨嵐山站寄放外套", query: "JR Saga-Arashiyama Station",
+            lat: 35.0185, lng: 135.6813, stayMins: 15, lockedTime: null, tag: "輕裝逛嵐山",
+            note: "將晚間搭無窗富貴號要穿的保暖衣物寄放於車站置物櫃。",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 25, cost: 240, desc: "步行至京都站搭 JR 嵯峨野線（17 分）直達 JR 嵯峨嵐山站。" }, taxi: { mins: 28, cost: 4200, desc: "直達嵐山核心區。" } }
+          },
+          {
+            id: "d3-2", name: "嵐山竹林小徑＆天龍寺／常寂光寺（彈性）", query: "天龍寺 嵐山",
+            lat: 35.0157, lng: 135.6738, stayMins: 150, lockedTime: null, tag: "寺院自由搭",
+            note: "當天依體力與人潮自由挑選 1–2 座：天龍寺、常寂光寺、二尊院、祇王寺或野宮神社。",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 12, cost: 0, desc: "出站散步進入嵐山竹林與寺院區。" }, transit: { mins: 12, cost: 0, desc: "步行最順。" }, taxi: { mins: 6, cost: 700, desc: "巷弄人多，步行更快。" } }
+          },
+          {
+            id: "d3-3", name: "嵐山大街午餐", query: "Kameyamaya Arashiyama",
+            lat: 35.0155, lng: 135.6776, stayMins: 90, lockedTime: null, tag: "在地美食",
+            note: "推薦 Kameyamaya（龜山家）、鯛匠 HANANA 或湯豆腐定食。",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 8, cost: 0, desc: "走回熱鬧的嵐山商店街覓食。" }, transit: { mins: 8, cost: 0, desc: "步行即達。" }, taxi: { mins: 5, cost: 700, desc: "步行即達。" } }
+          },
+          {
+            id: "d3-4", name: "渡月橋＆% ARABICA＆寶嚴院（彈性）", query: "% ARABICA Kyoto Arashiyama",
+            lat: 35.0138, lng: 135.6766, stayMins: 220, lockedTime: null, tag: "桂川秋色",
+            note: "漫步渡月橋、喝 % ARABICA 咖啡、視體力逛寶嚴院獅子吼庭園與商店街伴手禮。",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 5, cost: 0, desc: "沿大街往南步行 5 分鐘至渡月橋畔。" }, transit: { mins: 5, cost: 0, desc: "步行即達。" }, taxi: { mins: 4, cost: 600, desc: "步行即達。" } }
+          },
+          {
+            id: "d3-5", name: "JR嵯峨嵐山站拿外套➔搭18:02普通車赴馬堀", query: "JR Saga-Arashiyama Station",
+            lat: 35.0185, lng: 135.6813, stayMins: 25, lockedTime: "17:45", tag: "📌 17:45 拿外套",
+            specialRule: "sagano_jr",
+            note: "領出厚外套穿上！務必搭 18:02 JR 嵯峨野線「普通車」（快速不停馬堀）坐 1 站至馬堀站。",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 12, cost: 0, desc: "從渡月橋散步回 JR 嵯峨嵐山站領外套。" }, transit: { mins: 12, cost: 0, desc: "步行最快。" }, taxi: { mins: 6, cost: 800, desc: "若走累可搭短程計程車。" } }
+          },
+          {
+            id: "d3-6", name: "小火車龜岡站候車➔18:59富貴號5號車廂", query: "Torokko Kameoka Station",
+            lat: 35.0176, lng: 135.6119, stayMins: 35, lockedTime: "18:59", tag: "📌 已預約 18:59",
+            note: "無窗超冷務必穿羽絨衣毛帽！關閉閃光燈拍夜間發光楓葉峽谷，19:25 抵小火車嵯峨站。",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 18, cost: 200, desc: "JR 普通車（7 分）至馬堀站，出站跟人潮步行 8–10 分至小火車龜岡站。" }, taxi: { mins: 22, cost: 3600, desc: "若不幸錯過 JR 普通車，請立刻改搭計程車直衝龜岡站！" } }
+          },
+          {
+            id: "d3-7", name: "返回御宿野乃 京都七條", query: "Onyado Nono Kyotoshichijo",
+            lat: 34.9896, lng: 135.7621, stayMins: 30, lockedTime: null, tag: "泡湯＆宵夜拉麵",
+            note: "小火車嵯峨站下車旁就是 JR 嵯峨嵐山站，搭 JR 17 分鐘輕鬆回飯店泡湯。",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 28, cost: 240, desc: "JR 嵯峨嵐山站搭 JR 嵯峨野線回京都站，步行 7 分回飯店。" }, taxi: { mins: 28, cost: 4200, desc: "直達飯店門口。" } }
+          }
+        ]
+      },
+      {
+        day: 4,
+        date: "11/29 (日)",
+        startTime: "08:15",
+        title: "南禪寺＆永觀堂 ➔ 13:00 三嶋亭本店 ➔ 貴船夜楓（或河原町逛街）",
+        summary: "上午攻佔東山北段兩大紅葉名所，13:00 準時享用百年名店三嶋亭壽喜燒，下午衝貴船夜楓或逛寺町通／錦市場。",
+        stops: [
+          {
+            id: "d4-0", name: "御宿野乃 京都七條出發", query: "Onyado Nono Kyotoshichijo",
+            lat: 34.9896, lng: 135.7621, stayMins: 5, lockedTime: null, tag: "紅葉大日子",
+            note: "出發往東山北段，搭計程車或地鐵皆很順暢。",
+            transportMode: "walk", customTransit: null
+          },
+          {
+            id: "d4-1", name: "南禪寺水路閣", query: "南禪寺 京都",
+            lat: 35.0112, lng: 135.7937, stayMins: 60, lockedTime: null, tag: "紅磚拱門紅葉",
+            note: "趁早拍三門與復古紅磚水道橋「水路閣」搭配紅葉。",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 28, cost: 430, desc: "京阪七條至三條轉東西線至蹴上站，步行 8 分鐘。" }, taxi: { mins: 16, cost: 2100, desc: "飯店直達南禪寺入口免轉車。" } }
+          },
+          {
+            id: "d4-2", name: "永觀堂紅葉之王", query: "永觀堂 京都",
+            lat: 35.0144, lng: 135.7955, stayMins: 115, lockedTime: null, tag: "09:00 開門",
+            note: "放生池與極樂橋周圍紅葉密度全京都第一，11/29 正值絕美見頃！",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 5, cost: 0, desc: "出南禪寺北側步行 5 分鐘即達永觀堂。" }, transit: { mins: 5, cost: 0, desc: "緊鄰步行即可。" }, taxi: { mins: 3, cost: 600, desc: "步行更快。" } }
+          },
+          {
+            id: "d4-3", name: "三嶋亭 本店 壽喜燒", query: "三嶋亭 本店 京都",
+            lat: 35.0086, lng: 135.7672, stayMins: 90, lockedTime: "13:00", tag: "📌 已預約 13:00",
+            note: "寺町三條下車步行1分、切勿遲到！享受百年老舖專人桌邊和牛壽喜燒。",
+            transportMode: "taxi",
+            customTransit: { taxi: { mins: 12, cost: 1400, desc: "永觀堂前搭計程車至「寺町三條」下車走 1 分鐘最保險！" }, transit: { mins: 24, cost: 230, desc: "搭市營巴士 5 號至河原町三條步行 3 分。" } }
+          },
+          {
+            id: "d4-4", name: "貴船神社＆叡山電車KIRARA夜楓（或河原町錦市場逛街）", query: "貴船神社 京都",
+            lat: 35.1216, lng: 135.7629, stayMins: 180, lockedTime: null, tag: "⚠️ 33號末班公車 17:38",
+            specialRule: "kifune",
+            note: "17:38為貴船下山末班公車33號（17:00 前先抽水占卜），回程搭叡山電車體驗熄燈慢行紅葉隧道！若 Day 2 已去過，下午改逛錦市場、here 京都與河原町。",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 45, cost: 700, desc: "步行 8 分至京阪三條 ➔ 出町柳搭 15:15 KIRARA 赴貴船口 ➔ 轉 33 號公車。" }, taxi: { mins: 38, cost: 6200, desc: "建議搭叡山電車才能體驗熄燈紅葉隧道。" } }
+          }
+        ]
+      },
+      {
+        day: 5,
+        date: "11/30 (一)",
+        startTime: "08:15",
+        title: "宇治中村藤吉本店抽號碼牌＆平等院 ➔ 奈良公園餵小鹿＆東大寺",
+        summary: "沿同一條 JR 奈良線一路往南：早鳥直衝宇治抽號碼牌吃竹筒聖代、逛平等院，中午南下奈良餵鹿看大佛，傍晚近鐵特急舒適回京都。",
+        stops: [
+          {
+            id: "d5-0", name: "御宿野乃 京都七條出發", query: "Onyado Nono Kyotoshichijo",
+            lat: 34.9896, lng: 135.7621, stayMins: 5, lockedTime: null, tag: "JR 奈良線直衝",
+            note: "步行至 JR 京都站 8/9/10 號月台搭快速電車直達宇治。",
+            transportMode: "walk", customTransit: null
+          },
+          {
+            id: "d5-1", name: "中村藤吉本店 宇治本店抽號碼牌＆平等院散策", query: "中村藤吉本店 宇治本店",
+            lat: 34.8902, lng: 135.8012, stayMins: 140, lockedTime: null, tag: "08:50 抽號碼牌",
+            note: "出 JR 宇治站步行 1 分鐘先抽整理券，空檔逛平等院鳳凰堂，10:00 叫號回本店吃抹茶蕎麥麵＋竹筒聖代！",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 26, cost: 240, desc: "JR 京都站搭奈良線快速（17 分）直達 JR 宇治站，對面即本店。" }, taxi: { mins: 32, cost: 5500, desc: "JR 奈良線更快更省。" } }
+          },
+          {
+            id: "d5-2", name: "宇治川橋畔散步", query: "宇治川 朝霧橋",
+            lat: 34.8903, lng: 135.8091, stayMins: 55, lockedTime: null, tag: "橘橋＆朝霧橋",
+            note: "吃飽沿橘橋、朝霧橋散步消化，可順路買 Hoho Hojicha 焙茶。",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 8, cost: 0, desc: "從平等院表參道散步過橋至宇治川中洲。" }, transit: { mins: 8, cost: 0, desc: "步行即可。" }, taxi: { mins: 4, cost: 700, desc: "步行即可。" } }
+          },
+          {
+            id: "d5-3", name: "奈良公園餵小鹿＆東大寺＆二月堂", query: "東大寺 奈良",
+            lat: 34.6890, lng: 135.8398, stayMins: 180, lockedTime: null, tag: "小鹿＆大佛殿",
+            note: "買鹿仙貝（¥200）先收進包包再逐片餵食，參觀東大寺大佛殿與二月堂黃昏美景。",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 45, cost: 690, desc: "JR 宇治站搭奈良線快速（30 分）至 JR 奈良站，轉巴士 8 分至東大寺前。" }, taxi: { mins: 42, cost: 9800, desc: "搭 JR 到奈良站再轉短程計程車（約 ¥1,000）最划算。" } }
+          },
+          {
+            id: "d5-4", name: "近鐵奈良站搭特急回京都", query: "Kintetsu-Nara Station",
+            lat: 34.6841, lng: 135.8275, stayMins: 45, lockedTime: null, tag: "對號座睡回京都",
+            note: "沿東向商店街買中谷堂麻糬，搭近鐵特急（35 分鐘，全車對號座）舒適回京都站。",
+            transportMode: "walk",
+            customTransit: { walk: { mins: 16, cost: 0, desc: "穿過奈良公園與東向商店街散步至近鐵奈良站。" }, transit: { mins: 10, cost: 220, desc: "東大寺前搭市區巴士至近鐵奈良站。" }, taxi: { mins: 7, cost: 900, desc: "走累了搭計程車很快。" } }
+          }
+        ]
+      },
+      {
+        day: 6,
+        date: "12/01 (二)",
+        startTime: "08:30",
+        title: "退房寄行李 ➔ 勝尾寺達摩海 ➔ 臨空城 Outlet ➔ 23:30 捷星 GK57 返台",
+        summary: "09:00 前行李特工寄機場，輕裝直奔勝尾寺，下午臨空城 Outlet 血拼吃晚餐，20:00 坐 1 站直達關西機場搭捷星 GK57 返台。",
+        stops: [
+          {
+            id: "d6-1", name: "御宿野乃退房＆行李特工寄機場", query: "Onyado Nono Kyotoshichijo",
+            lat: 34.9896, lng: 135.7621, stayMins: 30, lockedTime: "09:00", tag: "📌 09:00 前寄件",
+            note: "務必於 09:00 前將大行李交給櫃檯寄往關西機場！護照、行動電源、大型購物袋留身邊。",
+            transportMode: "walk", customTransit: null
+          },
+          {
+            id: "d6-2", name: "勝尾寺 滿山達摩＆紅葉", query: "勝尾寺 箕面市",
+            lat: 34.8658, lng: 135.4910, stayMins: 115, lockedTime: null, tag: "⚠️ 留意巴士班距",
+            specialRule: "katsuoji",
+            note: "箕面萱野站轉阪急巴士30號或計程車（約15分）；下車進寺前務必先拍好回程巴士時刻表！",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 85, cost: 1780, desc: "京都站 JR 新快速至新大阪 ➔ 御堂筋線至終點箕面萱野 ➔ 6號站牌搭阪急巴士30號。" }, taxi: { mins: 60, cost: 14500, desc: "建議搭電車至箕面萱野後，若公車剛開走再轉計程車上山（約 ¥3,200）。" } }
+          },
+          {
+            id: "d6-3", name: "臨空城 Outlet 血拼＆晚餐", query: "Rinku Premium Outlets",
+            lat: 34.4071, lng: 135.2939, stayMins: 300, lockedTime: null, tag: "營業至 20:00",
+            note: "服務中心換優惠券、營業至20:00！晚餐直接在海景餐廳或美食街解決。",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 98, cost: 1960, desc: "巴士下山至箕面萱野 ➔ 御堂筋線一車直達難波 ➔ 轉南海空港急行（37分）至臨空城。" }, taxi: { mins: 70, cost: 22000, desc: "橫跨大阪府南北，搭電車最準時划算。" } }
+          },
+          {
+            id: "d6-4", name: "關西機場(KIX)領行李＆搭捷星GK57", query: "Kansai International Airport Terminal 1",
+            lat: 34.4320, lng: 135.2304, stayMins: 180, lockedTime: "23:30", tag: "📌 23:30 GK57起飛",
+            note: "20:20 抵達先領回行李特工大行李箱，將 Outlet 戰利品打包託運，過海關逛免稅店搭 23:30 捷星 GK57！",
+            transportMode: "transit",
+            customTransit: { transit: { mins: 14, cost: 370, desc: "臨空城站搭南海電鐵或 JR 坐 1 站（6 分鐘）直達關西機場 T1。" }, taxi: { mins: 10, cost: 2800, desc: "含跨海聯絡橋過路費，戰利品極多時可考慮。" } }
+          }
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // 3. 狀態管理與 localStorage 持久化
+    // =========================================================================
+    const STORAGE_KEY = "yixiang_kyoto_doggo_2026_v4";
+
+    let appState = {
+      selectedDay: 1,
+      activeTab: "itinerary",
+      mapFilter: "day_plus_nearby",
+      savedCat: "全部",
+      savedRegion: "全部",
+      savedSort: "distance",
+      exchangeRate: 0.212,
+      rateSource: "預設基準匯率 (離線可用)",
+      userLocation: null, // { lat, lng, label, isSimulated }
+      itinerary: JSON.parse(JSON.stringify(DEFAULT_ITINERARY)),
+      pocketPlaces: JSON.parse(JSON.stringify(DEFAULT_POCKET_PLACES)),
+      flights: {
+        outbound: { no: "GK50", sched: "06:30", delay: 0 },
+        inbound: { no: "GK57", sched: "23:30", delay: 0 }
+      },
+      checklist: { lp1: false, lp2: false, lp3: false }
+    };
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          appState = { ...appState, ...parsed };
+          if (!Array.isArray(appState.pocketPlaces) || appState.pocketPlaces.length === 0) {
+            appState.pocketPlaces = JSON.parse(JSON.stringify(DEFAULT_POCKET_PLACES));
+          }
+        }
+      } catch (e) {
+        console.warn("讀取 localStorage 失敗", e);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } catch (e) {
+        console.warn("寫入 localStorage 失敗", e);
+      }
+    }
+
+    // =========================================================================
+    // 4. 地理距離 (Haversine) 與三種交通自動估算引擎
+    // =========================================================================
+    function calcDistanceKm(lat1, lng1, lat2, lng2) {
+      if (lat1 == null || lng1 == null || lat2 == null || lng2 == null) return 1.2;
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLng = (lng2 - lng1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) ** 2 +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLng / 2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    function formatDist(km) {
+      if (km < 1) return `${Math.round(km * 1000)} m`;
+      return `${km.toFixed(1)} km`;
+    }
+
+    function estimateTransportLeg(prevStop, currStop) {
+      const straightKm = calcDistanceKm(prevStop.lat, prevStop.lng, currStop.lat, currStop.lng);
+      const roadKm = Math.max(0.15, straightKm * 1.28);
+
+      const autoWalkMins = Math.max(2, Math.round(roadKm * 13.5));
+      const autoTransitMins = roadKm < 0.7 ? autoWalkMins : Math.max(8, Math.round(roadKm * 2.6 + 8));
+      const autoTransitCost = roadKm < 0.7 ? 0 : Math.min(2400, Math.round((190 + roadKm * 28) / 10) * 10);
+      const autoTaxiMins = Math.max(4, Math.round(roadKm * 2.2 + 3));
+      const autoTaxiCost = roadKm < 1.2 ? 600 : Math.round((600 + (roadKm - 1.2) * 390) / 100) * 100;
+
+      const c = currStop.customTransit || {};
+      return {
+        distKm: roadKm,
+        walk: {
+          mins: c.walk?.mins ?? autoWalkMins,
+          cost: c.walk?.cost ?? 0,
+          desc: c.walk?.desc ?? (autoWalkMins > 40 ? `步行距離約 ${formatDist(roadKm)}，偏遠耗體力，建議搭車。` : `步行約 ${formatDist(roadKm)}，適合沿途散步拍照。`)
+        },
+        transit: {
+          mins: c.transit?.mins ?? autoTransitMins,
+          cost: c.transit?.cost ?? autoTransitCost,
+          desc: c.transit?.desc ?? (roadKm < 0.7 ? "距離很近，直接步行最快。" : `搭乘電車／地鐵或巴士前往（預估距離 ${formatDist(roadKm)}）。`)
+        },
+        taxi: {
+          mins: c.taxi?.mins ?? autoTaxiMins,
+          cost: c.taxi?.cost ?? autoTaxiCost,
+          desc: c.taxi?.desc ?? `計程車直達門口（預估里程 ${formatDist(roadKm)}）。`
+        }
+      };
+    }
+
+    function guessSmartDayByCoords(lat, lng) {
+      // 臨空城 / 機場 / 勝尾寺
+      if (lat < 34.50 || (lat > 34.82 && lng < 135.56)) return 6;
+      // 大阪市區 / 堺市
+      if (lat < 34.76 && lng < 135.60) return 1;
+      // 奈良 / 宇治
+      if (lat < 34.93 && lng >= 135.75) return 5;
+      // 嵐山 / 嵯峨野 / 龜岡
+      if (lng < 135.71) return 3;
+      // 東山 / 清水 / 祇園 / 伏見
+      if (lat < 35.006 && lng >= 135.77) return 2;
+      // 其餘（河原町 / 南禪寺 / 永觀堂 / 貴船）
+      return 4;
+    }
+
+    // =========================================================================
+    // 5. 時間換算與日本即時時鐘 (UTC+9)
+    // =========================================================================
+    function getCurrentJSTDate() {
+      const now = new Date();
+      return new Date(now.getTime() + now.getTimezoneOffset() * 60000 + 9 * 3600000);
+    }
+
+    function getCurrentJSTMins() {
+      const j = getCurrentJSTDate();
+      return j.getHours() * 60 + j.getMinutes();
+    }
+
+    function timeStrToMins(str) {
+      if (!str || !str.includes(":")) return 510;
+      const [h, m] = str.split(":").map(Number);
+      return (h || 0) * 60 + (m || 0);
+    }
+
+    function minsToTimeStr(totalMins) {
+      const nextDay = totalMins >= 1440;
+      const norm = ((Math.round(totalMins) % 1440) + 1440) % 1440;
+      const hh = String(Math.floor(norm / 60)).padStart(2, "0");
+      const mm = String(norm % 60).padStart(2, "0");
+      return nextDay ? `隔日 ${hh}:${mm}` : `${hh}:${mm}`;
+    }
+
+    function updateLiveClocks() {
+      const j = getCurrentJSTDate();
+      const hh = String(j.getHours()).padStart(2, "0");
+      const mm = String(j.getMinutes()).padStart(2, "0");
+      const ss = String(j.getSeconds()).padStart(2, "0");
+      const elMain = document.getElementById("live-jst-clock");
+      const elDesk = document.getElementById("header-jst-clock-desktop");
+      const elMob = document.getElementById("header-jst-clock-mobile");
+      if (elMain) elMain.textContent = `${hh}:${mm}:${ss}`;
+      if (elDesk) elDesk.textContent = `${hh}:${mm}`;
+      if (elMob) elMob.textContent = `${hh}:${mm}`;
+    }
+
+    // =========================================================================
+    // 6. 核心引擎：動態連鎖時間計算 & 交通可行性偵測
+    // =========================================================================
+    function computeDaySchedule(dayObj) {
+      let currMins = timeStrToMins(dayObj.startTime || "08:30");
+      const items = [];
+      let conflictCount = 0;
+
+      dayObj.stops.forEach((stop, idx) => {
+        let legInfo = null;
+        if (idx > 0) {
+          const prevStop = dayObj.stops[idx - 1];
+          const leg = estimateTransportLeg(prevStop, stop);
+          const sel = stop.transportMode || (leg.distKm < 0.9 ? "walk" : "transit");
+          const departMins = currMins;
+          const travelMins = leg[sel].mins;
+          currMins += travelMins;
+
+          const modTime = departMins % 1440;
+          const isNightOrDawn = modTime < 330 || modTime >= 1410; // <05:30 or >=23:30
+          const walkTooFar = leg.walk.mins > 40;
+
+          let recommended = "transit";
+          if (isNightOrDawn) recommended = "taxi";
+          else if (leg.walk.mins <= 15) recommended = "walk";
+
+          const warnings = [];
+          if (isNightOrDawn && sel === "transit") {
+            warnings.push("⚠️ 出發時刻為深夜/清晨（05:30前或23:30後），電車巴士可能未發車或收班，建議改搭計程車 🚕！");
+          }
+          if (walkTooFar && sel === "walk") {
+            warnings.push(`⚠️ 步行預估需 ${leg.walk.mins} 分鐘（超過 40 分），建議改搭大眾交通或計程車！`);
+          }
+          if (stop.specialRule === "sagano_jr" && departMins > 1075) {
+            warnings.push("⚠️ 接近或超過 18:02 JR 嵯峨嵐山普通車！若錯過請立即改搭計程車 🚕 直衝小火車龜岡站！");
+          }
+          if (stop.specialRule === "katsuoji") {
+            warnings.push("🚌 勝尾寺 30 號巴士平日班距約 1～1.5 小時，若在箕面萱野站剛錯過可改搭計程車（約 15 分 / ¥3,200）。");
+          }
+
+          legInfo = {
+            departMins,
+            arriveMins: currMins,
+            selected: sel,
+            leg,
+            recommended,
+            isNightOrDawn,
+            walkTooFar,
+            warnings
+          };
+        }
+
+        const arriveMins = currMins;
+        let conflictLateMins = 0;
+        let earlyWaitMins = 0;
+        let effectiveStart = arriveMins;
+
+        if (stop.lockedTime) {
+          const lockMins = timeStrToMins(stop.lockedTime);
+          if (stop.id === "d6-4") {
+            // 23:30 起飛，需最晚 21:00 (起飛前 2.5h) 到機場
+            const deadline = lockMins - 150;
+            if (arriveMins > deadline) {
+              conflictLateMins = arriveMins - deadline;
+              conflictCount++;
+            }
+          } else {
+            if (arriveMins > lockMins) {
+              conflictLateMins = arriveMins - lockMins;
+              conflictCount++;
+            } else if (lockMins - arriveMins > 5) {
+              earlyWaitMins = lockMins - arriveMins;
+              effectiveStart = lockMins;
+            }
+          }
+        }
+
+        const stay = typeof stop.stayMins === "number" ? stop.stayMins : 60;
+        const departMins = typeof stop.overrideDepartMins === "number"
+          ? stop.overrideDepartMins
+          : effectiveStart + stay;
+
+        let stopWarning = "";
+        if (stop.specialRule === "kifune" && departMins > 1050) {
+          stopWarning = "⚠️ 貴船下山 33 號末班公車為 17:38！目前推算離開時間已過 17:30，請提早離場或步行 25 分順坡下山至貴船口。";
+        }
+
+        currMins = departMins;
+        items.push({ stop, idx, legInfo, arriveMins, departMins, conflictLateMins, earlyWaitMins, stopWarning });
+      });
+
+      return { items, conflictCount };
+    }
+
+    // =========================================================================
+    // 7. 分頁 1：行程表渲染與互動
+    // =========================================================================
+    function formatJPYWithTWD(jpy) {
+      if (!jpy || jpy === 0) return "免費 / 步行";
+      const twd = Math.round(jpy * appState.exchangeRate);
+      return `¥${jpy.toLocaleString()} (約 NT$${twd.toLocaleString()})`;
+    }
+
+    function buildGoogleMapsDirUrl(prev, curr, mode) {
+      const tm = { walk: "walking", transit: "transit", taxi: "driving" }[mode] || "transit";
+      const orig = prev.lat && prev.lng ? `${prev.lat},${prev.lng}` : prev.query;
+      const dest = curr.lat && curr.lng ? `${curr.lat},${curr.lng}` : curr.query;
+      return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(orig)}&destination=${encodeURIComponent(dest)}&travelmode=${tm}`;
+    }
+
+    function renderDaySelector() {
+      document.getElementById("day-selector").innerHTML = appState.itinerary.map(d => {
+        const active = d.day === appState.selectedDay;
+        return `
+          <button onclick="selectDay(${d.day})" class="shrink-0 px-3.5 py-2 rounded-xl border text-left transition ${
+            active ? "bg-maple text-white border-maple shadow-xs" : "bg-white text-stone-700 border-stone-200 hover:border-maple/50"
+          }">
+            <div class="text-[10px] font-bold opacity-85">Day ${d.day}</div>
+            <div class="text-xs font-extrabold whitespace-nowrap">${d.date}</div>
+          </button>
+        `;
+      }).join("");
+    }
+
+    function selectDay(dayNum) {
+      appState.selectedDay = parseInt(dayNum, 10);
+      saveState();
+      renderItineraryView();
+      const mapDaySel = document.getElementById("map-day-select");
+      if (mapDaySel) mapDaySel.value = String(appState.selectedDay);
+      if (appState.activeTab === "map") refreshMapMarkers();
+    }
+
+    function onDayStartTimeChange() {
+      const val = document.getElementById("day-start-time-input").value;
+      const dayObj = appState.itinerary.find(d => d.day === appState.selectedDay);
+      if (dayObj && val) {
+        dayObj.startTime = val;
+        dayObj.stops.forEach(s => delete s.overrideDepartMins);
+        saveState();
+        renderItineraryView();
+        showToast(`已更新 Day ${dayObj.day} 出發時間為 ${val}`);
+      }
+    }
+
+    function recalcDayFromNowJST() {
+      const dayObj = appState.itinerary.find(d => d.day === appState.selectedDay);
+      if (!dayObj) return;
+      const j = getCurrentJSTDate();
+      const hh = String(j.getHours()).padStart(2, "0");
+      const mm = String(j.getMinutes()).padStart(2, "0");
+      dayObj.startTime = `${hh}:${mm}`;
+      dayObj.stops.forEach(s => delete s.overrideDepartMins);
+      saveState();
+      renderItineraryView();
+      showToast(`⚡ 已以現在日本時間 ${hh}:${mm} 重算 Day ${dayObj.day}！`);
+    }
+
+    function adjustStayMins(dayNum, idx, delta) {
+      const dayObj = appState.itinerary.find(d => d.day === dayNum);
+      if (!dayObj?.stops[idx]) return;
+      delete dayObj.stops[idx].overrideDepartMins;
+      dayObj.stops[idx].stayMins = Math.max(5, (dayObj.stops[idx].stayMins || 60) + delta);
+      for (let i = idx + 1; i < dayObj.stops.length; i++) delete dayObj.stops[i].overrideDepartMins;
+      saveState();
+      renderItineraryView();
+    }
+
+    function markJustLeftStop(dayNum, idx) {
+      const dayObj = appState.itinerary.find(d => d.day === dayNum);
+      if (!dayObj?.stops[idx]) return;
+      const nowMins = getCurrentJSTMins();
+      dayObj.stops[idx].overrideDepartMins = nowMins;
+      for (let i = idx + 1; i < dayObj.stops.length; i++) delete dayObj.stops[i].overrideDepartMins;
+      saveState();
+      renderItineraryView();
+      showToast(`📍 已標記於現在 (${minsToTimeStr(nowMins)}) 離開，後續站點全自動重算！`);
+    }
+
+    function selectTransportMode(dayNum, idx, mode) {
+      const dayObj = appState.itinerary.find(d => d.day === dayNum);
+      if (!dayObj?.stops[idx]) return;
+      dayObj.stops[idx].transportMode = mode;
+      for (let i = idx; i < dayObj.stops.length; i++) delete dayObj.stops[i].overrideDepartMins;
+      saveState();
+      renderItineraryView();
+    }
+
+    function moveStop(dayNum, idx, dir) {
+      const dayObj = appState.itinerary.find(d => d.day === dayNum);
+      if (!dayObj) return;
+      const target = idx + dir;
+      if (target < 0 || target >= dayObj.stops.length) return;
+      [dayObj.stops[idx], dayObj.stops[target]] = [dayObj.stops[target], dayObj.stops[idx]];
+      dayObj.stops.forEach(s => delete s.overrideDepartMins);
+      saveState();
+      renderItineraryView();
+      if (appState.activeTab === "map") refreshMapMarkers();
+      showToast("已調整順序並自動重算交通與時間");
+    }
+
+    function deleteStop(dayNum, idx) {
+      const dayObj = appState.itinerary.find(d => d.day === dayNum);
+      if (!dayObj || dayObj.stops.length <= 1) {
+        showToast("每日至少需保留 1 個站點");
+        return;
+      }
+      const removed = dayObj.stops.splice(idx, 1)[0];
+      dayObj.stops.forEach(s => delete s.overrideDepartMins);
+      saveState();
+      renderItineraryView();
+      if (appState.activeTab === "map") refreshMapMarkers();
+      showToast(`已移除「${removed.name}」`);
+    }
+
+    function renderItineraryView() {
+      renderDaySelector();
+      const dayObj = appState.itinerary.find(d => d.day === appState.selectedDay) || appState.itinerary[0];
+      document.getElementById("day-start-time-input").value = dayObj.startTime || "08:30";
+
+      const sch = computeDaySchedule(dayObj);
+      const confEl = document.getElementById("day-conflict-summary");
+      if (sch.conflictCount > 0) {
+        confEl.className = "text-[11px] font-extrabold text-maple bg-red-50 px-2.5 py-1 rounded-lg border border-red-200";
+        confEl.textContent = `⚠️ ${sch.conflictCount} 處預約時間衝突`;
+      } else {
+        confEl.className = "text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200";
+        confEl.textContent = "✅ 全部時間順暢無衝突";
+      }
+
+      let delayNotice = "";
+      if (dayObj.day === 1 && appState.flights.outbound.delay > 0) {
+        const adj = minsToTimeStr(timeStrToMins(appState.flights.outbound.sched) + appState.flights.outbound.delay);
+        delayNotice = `
+          <div class="mt-3 p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-950 space-y-1">
+            <div class="font-extrabold text-maple">✈️ 捷星 GK50 模擬延誤 +${appState.flights.outbound.delay} 分（預計 ${adj} 抵關西）</div>
+            <p>已自動順延 Day 1 出發時間！請檢查 09:00 行李特工與 12:00 牛舌的檸檬是否出現衝突警示。</p>
+          </div>
+        `;
+      }
+
+      document.getElementById("day-summary-card").innerHTML = `
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-xs font-extrabold text-maple bg-red-50 px-2.5 py-0.5 rounded-md">Day ${dayObj.day}｜${dayObj.date}</span>
+          <span class="text-[11px] text-stone-400">共 ${dayObj.stops.length} 站</span>
+        </div>
+        <h2 class="text-base font-extrabold text-slateDeep mt-1.5 leading-snug">${dayObj.title}</h2>
+        <p class="text-xs text-stone-600 mt-1 leading-relaxed">${dayObj.summary}</p>
+        ${delayNotice}
+      `;
+
+      document.getElementById("itinerary-timeline").innerHTML = sch.items.map(item => {
+        const { stop, idx, legInfo, arriveMins, departMins, conflictLateMins, earlyWaitMins, stopWarning } = item;
+
+        let connectorHtml = "";
+        if (legInfo && idx > 0) {
+          const prevStop = dayObj.stops[idx - 1];
+          const sel = legInfo.selected;
+          const leg = legInfo.leg;
+          const curInfo = leg[sel];
+          const dirUrl = buildGoogleMapsDirUrl(prevStop, stop, sel);
+
+          connectorHtml = `
+            <div class="my-2.5 ml-3 pl-3.5 border-l-2 border-dashed border-ginkgo/70">
+              <div class="bg-stone-50 rounded-2xl p-3 border border-stone-200/90 space-y-2">
+                <div class="flex items-center justify-between gap-2 text-[11px]">
+                  <span class="font-bold text-stone-500">
+                    ${minsToTimeStr(legInfo.departMins)} ➔ ${minsToTimeStr(legInfo.arriveMins)} · ${formatDist(leg.distKm)}
+                  </span>
+                  <a href="${dirUrl}" target="_blank" rel="noopener" class="font-extrabold text-blue-600 hover:underline">
+                    Google Maps 導航 ↗
+                  </a>
+                </div>
+
+                <div class="grid grid-cols-3 gap-1.5 bg-stone-200/70 p-1 rounded-xl text-[11px]">
+                  <button onclick="selectTransportMode(${dayObj.day}, ${idx}, 'walk')" class="py-1.5 px-1 rounded-lg font-bold transition flex flex-col items-center ${sel === 'walk' ? 'bg-white text-slateDeep shadow-xs' : 'text-stone-600'}">
+                    <span>🚶 步行 (${leg.walk.mins}分)</span>
+                    ${legInfo.recommended === 'walk' ? '<span class="text-[9px] text-emerald-700 font-extrabold">✨ 推薦</span>' : (legInfo.walkTooFar ? '<span class="text-[9px] text-amber-700">偏遠</span>' : '')}
+                  </button>
+                  <button onclick="selectTransportMode(${dayObj.day}, ${idx}, 'transit')" class="py-1.5 px-1 rounded-lg font-bold transition flex flex-col items-center ${sel === 'transit' ? 'bg-white text-maple shadow-xs' : 'text-stone-600'}">
+                    <span>🚃 大眾 (${leg.transit.mins}分)</span>
+                    ${legInfo.isNightOrDawn ? '<span class="text-[9px] text-maple font-extrabold">⚠️ 恐收班</span>' : (legInfo.recommended === 'transit' ? '<span class="text-[9px] text-emerald-700 font-extrabold">✨ 推薦</span>' : '')}
+                  </button>
+                  <button onclick="selectTransportMode(${dayObj.day}, ${idx}, 'taxi')" class="py-1.5 px-1 rounded-lg font-bold transition flex flex-col items-center ${sel === 'taxi' ? 'bg-white text-amber-900 shadow-xs' : 'text-stone-600'}">
+                    <span>🚕 計程車 (${leg.taxi.mins}分)</span>
+                    ${legInfo.recommended === 'taxi' ? '<span class="text-[9px] text-emerald-700 font-extrabold">✨ 最推薦</span>' : ''}
+                  </button>
+                </div>
+
+                <div class="bg-white rounded-xl p-2.5 border border-stone-200/80 text-xs space-y-1">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="font-bold text-slateDeep">⏱️ 約 ${curInfo.mins} 分鐘</span>
+                    <span class="font-extrabold text-maple bg-red-50 px-2 py-0.5 rounded-md">${formatJPYWithTWD(curInfo.cost)}</span>
+                  </div>
+                  <p class="text-stone-600 leading-relaxed">${curInfo.desc}</p>
+                </div>
+
+                ${legInfo.warnings.map(w => `<div class="bg-red-50 border border-red-200 text-maple text-[11px] font-bold px-2.5 py-1.5 rounded-xl">${w}</div>`).join("")}
+              </div>
+            </div>
+          `;
+        }
+
+        const singleMapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.query || stop.name)}`;
+        return `
+          ${connectorHtml}
+          <div class="bg-white rounded-2xl p-4 shadow-xs border ${conflictLateMins > 0 ? 'border-maple ring-2 ring-red-100' : 'border-stone-200/90'} space-y-2.5">
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-maple text-white text-[11px] font-black inline-flex items-center justify-center">${idx + 1}</span>
+                <span class="text-xs font-extrabold font-mono text-white bg-slateDeep px-2.5 py-0.5 rounded-lg">${minsToTimeStr(arriveMins)} – ${minsToTimeStr(departMins)}</span>
+                ${stop.lockedTime ? `<span class="text-[11px] font-extrabold text-maple bg-red-50 border border-red-200 px-2 py-0.5 rounded-md">📌 鎖定 ${stop.lockedTime}</span>` : ""}
+                ${stop.tag && !stop.tag.includes("📌") ? `<span class="text-[11px] font-bold text-amber-950 bg-ginkgoSoft border border-amber-200 px-2 py-0.5 rounded-md">${stop.tag}</span>` : ""}
+                ${earlyWaitMins > 0 ? `<span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">提早 ${earlyWaitMins} 分到</span>` : ""}
+              </div>
+
+              <div class="flex items-center gap-1 shrink-0">
+                <button onclick="moveStop(${dayObj.day}, ${idx}, -1)" class="w-7 h-7 rounded-lg bg-stone-50 hover:bg-stone-200 text-stone-500 text-xs flex items-center justify-center ${idx === 0 ? 'opacity-30 pointer-events-none' : ''}">▲</button>
+                <button onclick="moveStop(${dayObj.day}, ${idx}, 1)" class="w-7 h-7 rounded-lg bg-stone-50 hover:bg-stone-200 text-stone-500 text-xs flex items-center justify-center ${idx === dayObj.stops.length - 1 ? 'opacity-30 pointer-events-none' : ''}">▼</button>
+                <button onclick="deleteStop(${dayObj.day}, ${idx})" class="w-7 h-7 rounded-lg bg-red-50 hover:bg-red-100 text-maple text-xs flex items-center justify-center">🗑️</button>
+              </div>
+            </div>
+
+            ${conflictLateMins > 0 ? `
+              <div class="bg-red-50 border border-red-300 text-maple text-xs font-extrabold px-3 py-2 rounded-xl">
+                ⚠️ 預計遲到 ${conflictLateMins} 分鐘！建議縮短前站停留或改搭計程車 🚕。
+              </div>
+            ` : ""}
+
+            <div class="flex items-start justify-between gap-2">
+              <h3 class="text-base font-extrabold text-slateDeep leading-snug">${stop.name}</h3>
+              <div class="flex items-center gap-1 shrink-0">
+                <button onclick="flyToOnMap(${stop.lat}, ${stop.lng}, '${stop.name.replace(/'/g, "\\'")}')" class="px-2 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 text-[11px] font-bold transition">🗺️ 看地圖</button>
+                <a href="${singleMapUrl}" target="_blank" rel="noopener" class="px-2 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-bold transition">GMaps ↗</a>
+              </div>
+            </div>
+
+            ${stop.note ? `<div class="text-xs text-amber-950 bg-amber-50/70 border-l-4 border-ginkgo px-3 py-2 rounded-r-xl leading-relaxed">${stop.note}</div>` : ""}
+            ${stopWarning ? `<div class="bg-red-50 border border-red-200 text-maple text-xs font-bold px-3 py-2 rounded-xl">${stopWarning}</div>` : ""}
+
+            <div class="pt-2 border-t border-stone-100 flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5">
+                <span class="text-[11px] text-stone-500 font-semibold">停留</span>
+                <button onclick="adjustStayMins(${dayObj.day}, ${idx}, -15)" class="px-2 py-1 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 text-[11px] font-bold">-15分</button>
+                <span class="text-xs font-extrabold text-slateDeep min-w-[50px] text-center">${stop.stayMins} 分</span>
+                <button onclick="adjustStayMins(${dayObj.day}, ${idx}, 15)" class="px-2 py-1 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 text-[11px] font-bold">+15分</button>
+              </div>
+              <button onclick="markJustLeftStop(${dayObj.day}, ${idx})" class="text-[11px] font-bold bg-washi hover:bg-amber-100 text-slateDeep border border-stone-300 px-2.5 py-1.5 rounded-lg transition">
+                📍 我現在剛離開這站
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // =========================================================================
+    // 8. 分頁 2：Leaflet.js 互動地圖探索 + GPS + Nominatim 免費搜尋
+    // =========================================================================
+    let leafletMap = null;
+    let routeLayerGroup = null;
+    let pocketLayerGroup = null;
+    let gpsLayerGroup = null;
+    let searchLayerGroup = null;
+
+    function initLeafletMap() {
+      if (leafletMap) return;
+      leafletMap = L.map("leaflet-map", { zoomControl: true }).setView([35.0038, 135.7685], 12);
+
+      // 4 種可靠底圖圖層（預設 Google 繁體中文街道圖，右上角可一鍵切換備援）
+      const googleStreet = L.tileLayer("https://mt1.google.com/vt/lyrs=m&hl=zh-TW&x={x}&y={y}&z={z}", {
+        maxZoom: 20,
+        attribution: "&copy; Google Maps"
+      });
+      const googleHybrid = L.tileLayer("https://mt1.google.com/vt/lyrs=y&hl=zh-TW&x={x}&y={y}&z={z}", {
+        maxZoom: 20,
+        attribution: "&copy; Google Maps"
+      });
+      const cartoVoyager = L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+        maxZoom: 19,
+        subdomains: "abcd",
+        attribution: "&copy; OpenStreetMap &copy; CARTO"
+      });
+      const japanGSI = L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", {
+        maxZoom: 18,
+        attribution: "&copy; 國土地理院"
+      });
+
+      googleStreet.addTo(leafletMap);
+
+      const baseMaps = {
+        "🗺️ Google 繁體中文 (預設)": googleStreet,
+        "🛰️ Google 衛星混合": googleHybrid,
+        "🎨 CARTO 旅遊地圖": cartoVoyager,
+        "🇯🇵 日本國土地理院": japanGSI
+      };
+      L.control.layers(baseMaps, null, { position: "topright" }).addTo(leafletMap);
+
+      routeLayerGroup = L.layerGroup().addTo(leafletMap);
+      pocketLayerGroup = L.layerGroup().addTo(leafletMap);
+      gpsLayerGroup = L.layerGroup().addTo(leafletMap);
+      searchLayerGroup = L.layerGroup().addTo(leafletMap);
+    }
+
+    function getReferenceLocation() {
+      if (appState.userLocation) return appState.userLocation;
+      const dayObj = appState.itinerary.find(d => d.day === appState.selectedDay) || appState.itinerary[0];
+      const midStop = dayObj.stops[Math.min(1, dayObj.stops.length - 1)] || { lat: 35.0038, lng: 135.7685, name: "京都" };
+      return { lat: midStop.lat, lng: midStop.lng, label: `Day ${dayObj.day} 行程中心`, isSimulated: false };
+    }
+
+    function locateUserGPS() {
+      if (!navigator.geolocation) {
+        showToast("此裝置不支援 GPS 定位，請使用下方模擬位置按鈕！");
+        return;
+      }
+      showToast("📡 正在取得您的即時 GPS 位置...");
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          appState.userLocation = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+            label: "您的即時 GPS 位置",
+            isSimulated: false
+          };
+          saveState();
+          refreshMapMarkers(true);
+          renderSavedPlaces();
+          showToast("✅ 已定位目前位置並依距離排序附近景點！");
+        },
+        err => {
+          showToast("⚠️ 無法取得 GPS（請允許定位權限，或點選上方「模擬位置」測試）");
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
+      );
+    }
+
+    function setSimulatedLocation(name, lat, lng) {
+      appState.userLocation = { lat, lng, label: `模擬：${name}`, isSimulated: true };
+      saveState();
+      refreshMapMarkers(true);
+      renderSavedPlaces();
+      showToast(`📍 已切換至「模擬：${name}」，下方景點已依距離重新排序！`);
+    }
+
+    function setMapFilter(mode) {
+      appState.mapFilter = mode;
+      ["day_plus_nearby", "day_only", "all"].forEach(m => {
+        const btn = document.getElementById(`mf-${m}`);
+        if (!btn) return;
+        btn.className = m === mode
+          ? "px-2.5 py-1 rounded-lg font-bold bg-maple text-white"
+          : "px-2.5 py-1 rounded-lg font-bold bg-stone-100 text-stone-600";
+      });
+      refreshMapMarkers(false);
+    }
+
+    function onMapDaySelect(dayVal) {
+      selectDay(parseInt(dayVal, 10));
+      refreshMapMarkers(true);
+    }
+
+    function flyToOnMap(lat, lng, label) {
+      switchTab("map");
+      setTimeout(() => {
+        initLeafletMap();
+        leafletMap.invalidateSize();
+        leafletMap.flyTo([lat, lng], 15, { duration: 0.7 });
+        L.popup()
+          .setLatLng([lat, lng])
+          .setContent(`<div class="text-xs font-extrabold text-slateDeep">${label}</div>`)
+          .openOn(leafletMap);
+      }, 150);
+    }
+
+    function refreshMapMarkers(fitBounds = false) {
+      initLeafletMap();
+      leafletMap.invalidateSize();
+      routeLayerGroup.clearLayers();
+      pocketLayerGroup.clearLayers();
+      gpsLayerGroup.clearLayers();
+
+      const dayObj = appState.itinerary.find(d => d.day === appState.selectedDay) || appState.itinerary[0];
+      const refLoc = getReferenceLocation();
+      document.getElementById("gps-status-badge").textContent = `基準：${refLoc.label}`;
+      document.getElementById("nearby-ref-label").textContent = `距「${refLoc.label}」`;
+      const daySel = document.getElementById("map-day-select");
+      if (daySel) daySel.value = String(dayObj.day);
+
+      const boundsPoints = [];
+
+      // 1. 畫當日行程順序標記與虛線路徑
+      const latlngs = [];
+      dayObj.stops.forEach((st, idx) => {
+        if (!st.lat || !st.lng) return;
+        latlngs.push([st.lat, st.lng]);
+        boundsPoints.push([st.lat, st.lng]);
+        const icon = L.divIcon({
+          className: "",
+          html: `<div class="itinerary-pin">${idx + 1}</div>`,
+          iconSize: [28, 28],
+          iconAnchor: [14, 14]
+        });
+        const distStr = formatDist(calcDistanceKm(refLoc.lat, refLoc.lng, st.lat, st.lng));
+        L.marker([st.lat, st.lng], { icon })
+          .bindPopup(`
+            <div class="space-y-1 min-w-[180px]">
+              <div class="text-[10px] font-bold text-maple">Day ${dayObj.day} 第 ${idx + 1} 站 · 距基準 ${distStr}</div>
+              <div class="text-xs font-extrabold text-slateDeep">${st.name}</div>
+              ${st.note ? `<div class="text-[11px] text-stone-600">${st.note}</div>` : ""}
+              <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(st.query || st.name)}" target="_blank" class="inline-block text-[11px] font-bold text-blue-600 underline pt-0.5">在 Google Maps 開啟 ↗</a>
+            </div>
+          `)
+          .addTo(routeLayerGroup);
+      });
+
+      if (latlngs.length > 1) {
+        L.polyline(latlngs, { color: "#B8332A", weight: 3.5, dashArray: "7, 7", opacity: 0.85 }).addTo(routeLayerGroup);
+      }
+    function matchAreaGroup(areaText, group) {
+      if (group === "全部區域") return true;
+      const a = areaText || "";
+      if (group === "大阪") return a.includes("大阪") && !a.includes("箕面");
+      if (group === "京都東山/祇園") return a.includes("東山") || a.includes("祇園") || a.includes("伏見");
+      if (group === "京都河原町") return a.includes("河原町");
+      if (group === "京都嵐山") return a.includes("嵐山") || a.includes("右京") || a.includes("龜岡");
+      if (group === "京都車站/洛北") return a.includes("車站") || a.includes("洛北") || a.includes("貴船");
+      if (group === "宇治/奈良") return a.includes("宇治") || a.includes("奈良");
+      if (group === "臨空城/勝尾寺") return a.includes("臨空") || a.includes("箕面") || a.includes("機場");
+      return true;
+    }
+
+    function renderSavedPlaces() {
+      const refLoc = getReferenceLocation();
+      document.getElementById("saved-total-count").textContent = appState.pocketPlaces.length;
+
+      document.getElementById("cat-filter-pills").innerHTML = CAT_LABELS.map(c => `
+        <button onclick="appState.savedCat='${c}'; renderSavedPlaces();" class="shrink-0 px-3 py-1.5 rounded-full text-xs font-bold border transition ${
+          appState.savedCat === c ? "bg-maple text-white border-maple" : "bg-stone-50 text-stone-600 border-stone-200"
+        }">${c}</button>
+      `).join("");
+
+      const areaEl = document.getElementById("area-filter-pills");
+      if (areaEl) {
+        areaEl.innerHTML = AREA_GROUPS.map(g => `
+          <button onclick="appState.savedArea='${g}'; renderSavedPlaces();" class="shrink-0 px-2.5 py-1 rounded-full text-[11px] font-bold border transition ${
+            appState.savedArea === g ? "bg-slateDeep text-white border-slateDeep" : "bg-washi text-stone-600 border-stone-200"
+          }">${g}</button>
+        `).join("");
+      }
+
+      const kw = (document.getElementById("saved-search-input").value || "").trim().toLowerCase();
+      document.getElementById("saved-search-clear").classList.toggle("hidden", !kw);
+
+      let list = appState.pocketPlaces
+        .map(p => ({ ...p, distKm: calcDistanceKm(refLoc.lat, refLoc.lng, p.lat, p.lng) }))
+        .filter(p => {
+          const matchCat = appState.savedCat === "全部" || p.cat === appState.savedCat;
+          const matchArea = matchAreaGroup(p.area, appState.savedArea || "全部區域");
+          const matchKw = !kw ||
+            p.name.toLowerCase().includes(kw) ||
+            p.cat.toLowerCase().includes(kw) ||
+            p.area.toLowerCase().includes(kw) ||
+            (p.note && p.note.toLowerCase().includes(kw));
+          return matchCat && matchArea && matchKw;
+        });
+        L.marker([u.lat, u.lng], { icon: gpsIcon, zIndexOffset: 900 })
+          .bindPopup(`<div class="text-xs font-extrabold text-blue-700">📍 ${u.label}</div>`)
+          .addTo(gpsLayerGroup);
+      }
+
+      // 3. 畫口袋名單標記（依篩選條件）
+      if (appState.mapFilter !== "day_only") {
+        appState.pocketPlaces.forEach(p => {
+          const dist = calcDistanceKm(refLoc.lat, refLoc.lng, p.lat, p.lng);
+          if (appState.mapFilter === "day_plus_nearby" && dist > 6.5) return;
+          const pIcon = L.divIcon({
+            className: "",
+            html: `<div class="pocket-pin">★</div>`,
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+          });
+          L.marker([p.lat, p.lng], { icon: pIcon })
+            .bindPopup(`
+              <div class="space-y-1.5 min-w-[190px]">
+                <div class="text-[10px] font-bold text-amber-700">${p.cat} · 距離 ${formatDist(dist)}</div>
+                <div class="text-xs font-extrabold text-slateDeep">${p.name}</div>
+                ${p.note ? `<div class="text-[11px] bg-amber-50 px-2 py-1 rounded text-amber-950">📝 ${p.note}</div>` : ""}
+                <div class="flex gap-1.5 pt-1">
+                  <button onclick="addPocketPlaceToDay('${p.id}', ${appState.selectedDay})" class="flex-1 bg-maple text-white text-[11px] font-bold py-1.5 px-2 rounded-lg">✨ 加入 Day ${appState.selectedDay}</button>
+                  <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name)}" target="_blank" class="bg-blue-50 text-blue-700 text-[11px] font-bold py-1.5 px-2 rounded-lg">地圖↗</a>
+                </div>
+              </div>
+            `)
+            .addTo(pocketLayerGroup);
+        });
+      }
+
+      if (fitBounds && boundsPoints.length > 0) {
+        if (appState.userLocation && fitBounds === true) {
+          leafletMap.setView([appState.userLocation.lat, appState.userLocation.lng], 14);
+        } else {
+          leafletMap.fitBounds(L.latLngBounds(boundsPoints), { padding: [36, 36], maxZoom: 15 });
+        }
+      }
+
+      renderMapNearbyList(refLoc);
+    }
+
+    function renderMapNearbyList(refLoc) {
+      const sorted = [...appState.pocketPlaces]
+        .map(p => ({ ...p, distKm: calcDistanceKm(refLoc.lat, refLoc.lng, p.lat, p.lng) }))
+        .sort((a, b) => a.distKm - b.distKm)
+        .slice(0, 14);
+
+      document.getElementById("map-nearby-list").innerHTML = sorted.map(p => {
+        const walkMins = Math.max(2, Math.round(p.distKm * 1.25 * 13.5));
+        const taxiMins = Math.max(4, Math.round(p.distKm * 1.25 * 2.2 + 3));
+        const bestDay = p.bestDay || guessSmartDayByCoords(p.lat, p.lng);
+        return `
+          <div class="bg-white rounded-2xl p-3.5 shadow-xs border border-stone-200/90 space-y-2">
+            <div class="flex items-start justify-between gap-2">
+              <div class="min-w-0 space-y-0.5">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="text-[11px] font-extrabold bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-full">📏 ${formatDist(p.distKm)}</span>
+                  <span class="text-[10px] font-bold text-stone-500">🚶 ${walkMins}分 · 🚕 ${taxiMins}分</span>
+                  <span class="text-[10px] font-bold bg-stone-100 text-stone-600 px-1.5 py-0.5 rounded">${p.cat}</span>
+                </div>
+                <h4 class="text-sm font-extrabold text-slateDeep truncate">${p.name}</h4>
+              </div>
+              <button onclick="flyToOnMap(${p.lat}, ${p.lng}, '${p.name.replace(/'/g, "\\'")}')" class="shrink-0 bg-amber-50 hover:bg-amber-100 text-amber-900 text-[11px] font-bold px-2.5 py-1.5 rounded-xl">在地圖看</button>
+            </div>
+            ${p.note ? `<div class="text-xs text-amber-950 bg-amber-50 border-l-4 border-ginkgo px-2.5 py-1 rounded-r-lg">📝 ${p.note}</div>` : ""}
+            <div class="flex items-center gap-2">
+              <button onclick="addPocketPlaceToDay('${p.id}', ${appState.selectedDay})" class="flex-1 bg-maple hover:bg-mapleDark text-white text-xs font-bold py-2 rounded-xl transition">
+                ✨ 排入目前行程 (Day ${appState.selectedDay})
+              </button>
+              <select onchange="if(this.value){ addPocketPlaceToDay('${p.id}', this.value); this.value=''; }" class="bg-stone-100 text-stone-700 text-xs font-bold py-2 px-2 rounded-xl border border-stone-200">
+                <option value="">指定天數 (順路 Day ${bestDay})</option>
+                <option value="1">Day 1 (11/26)</option>
+                <option value="2">Day 2 (11/27)</option>
+                <option value="3">Day 3 (11/28)</option>
+                <option value="4">Day 4 (11/29)</option>
+                <option value="5">Day 5 (11/30)</option>
+                <option value="6">Day 6 (12/01)</option>
+              </select>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // 免費 Nominatim 即時搜尋日本地點
+    async function handleMapPlaceSearch(e) {
+      e.preventDefault();
+      const q = (document.getElementById("map-search-input").value || "").trim();
+      if (!q) return;
+      const box = document.getElementById("map-search-results");
+      const btn = document.getElementById("map-search-btn");
+      box.classList.remove("hidden");
+      box.innerHTML = `<div class="text-xs text-stone-500 py-2 text-center">🔍 正在搜尋日本「${q}」...</div>`;
+      btn.disabled = true;
+
+      try {
+        const url = `https://nominatim.openstreetmap.org/search?format=json&countrycodes=jp&limit=6&accept-language=zh-TW,ja,en&q=${encodeURIComponent(q)}`;
+        const res = await fetch(url);
+        const results = await res.json();
+
+        if (!results || results.length === 0) {
+          box.innerHTML = `
+            <div class="bg-stone-50 rounded-xl p-3 text-xs text-stone-600 flex flex-wrap items-center justify-between gap-2">
+              <span>找不到完全相符的圖資，可直接用 Google 地圖查看：</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q + ' Japan')}" target="_blank" class="bg-blue-600 text-white font-bold px-3 py-1.5 rounded-lg">Google Maps 搜尋 ↗</a>
+            </div>
+          `;
+        } else {
+          const refLoc = getReferenceLocation();
+          window._lastSearchResults = results;
+          box.innerHTML = results.map((r, idx) => {
+            const lat = parseFloat(r.lat);
+            const lng = parseFloat(r.lon);
+            const shortName = r.display_name.split(",")[0];
+            const dist = calcDistanceKm(refLoc.lat, refLoc.lng, lat, lng);
+            return `
+              <div onclick="pinSearchResult(${idx})" class="cursor-pointer bg-washi hover:bg-purple-50 border border-stone-200 hover:border-purple-300 rounded-xl p-2.5 transition flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <div class="text-xs font-extrabold text-slateDeep truncate">📍 ${shortName}</div>
+                  <div class="text-[10px] text-stone-500 truncate">${r.display_name}</div>
+                </div>
+                <span class="shrink-0 text-[10px] font-extrabold text-purple-700 bg-purple-100 px-2 py-0.5 rounded-full">${formatDist(dist)}</span>
+              </div>
+            `;
+          }).join("") + `
+            <div class="flex justify-end pt-1">
+              <button onclick="document.getElementById('map-search-results').classList.add('hidden')" class="text-[11px] text-stone-400 hover:text-stone-700 font-bold">收合搜尋結果 ✕</button>
+            </div>
+          `;
+        }
+      } catch (err) {
+        box.innerHTML = `
+          <div class="bg-red-50 rounded-xl p-3 text-xs text-maple flex flex-wrap items-center justify-between gap-2">
+            <span>即時搜尋連線忙碌，請改用 Google 地圖搜尋：</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q + ' Japan')}" target="_blank" class="bg-blue-600 text-white font-bold px-3 py-1.5 rounded-lg">開啟 Google Maps ↗</a>
+          </div>
+        `;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function pinSearchResult(idx) {
+      const r = window._lastSearchResults?.[idx];
+      if (!r) return;
+      initLeafletMap();
+      searchLayerGroup.clearLayers();
+
+      const lat = parseFloat(r.lat);
+      const lng = parseFloat(r.lon);
+      const name = r.display_name.split(",")[0].trim();
+      const refLoc = getReferenceLocation();
+      const dist = calcDistanceKm(refLoc.lat, refLoc.lng, lat, lng);
+      const walkMins = Math.max(2, Math.round(dist * 1.25 * 13.5));
+      const taxiMins = Math.max(4, Math.round(dist * 1.25 * 2.2 + 3));
+
+      window._activePinnedPlace = { name, lat, lng, fullAddr: r.display_name };
+
+      const icon = L.divIcon({
+        className: "",
+        html: `<div class="search-pin">🔎</div>`,
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
+      });
+
+      const marker = L.marker([lat, lng], { icon, zIndexOffset: 1000 })
+        .bindPopup(`
+          <div class="space-y-2 min-w-[210px]">
+            <div class="text-[10px] font-bold text-purple-700">🔎 搜尋釘選 · 距基準 ${formatDist(dist)}</div>
+            <div class="text-xs font-extrabold text-slateDeep">${name}</div>
+            <div class="text-[11px] text-stone-600">🚶 步行約 ${walkMins} 分 · 🚕 計程車約 ${taxiMins} 分</div>
+            <div class="flex flex-col gap-1.5 pt-1">
+              <button onclick="savePinnedToPocket()" class="w-full bg-ginkgo text-white text-[11px] font-bold py-1.5 rounded-lg">➕ 加入口袋名單</button>
+              <button onclick="addPinnedToSelectedDay()" class="w-full bg-maple text-white text-[11px] font-bold py-1.5 rounded-lg">✨ 直接排入 Day ${appState.selectedDay} 行程</button>
+            </div>
+          </div>
+        `)
+        .addTo(searchLayerGroup);
+
+      leafletMap.flyTo([lat, lng], 15, { duration: 0.8 });
+      setTimeout(() => marker.openPopup(), 450);
+      document.getElementById("map-search-results").classList.add("hidden");
+    }
+
+    function savePinnedToPocket() {
+      const p = window._activePinnedPlace;
+      if (!p) return;
+      const newItem = {
+        id: "custom-" + Date.now(),
+        name: p.name,
+        area: "自訂搜尋地點",
+        cat: "景點/寺社",
+        lat: p.lat,
+        lng: p.lng,
+        rating: 4.5,
+        price: "",
+        note: "從地圖搜尋直接釘選加入",
+        bestDay: guessSmartDayByCoords(p.lat, p.lng)
+      };
+      appState.pocketPlaces.unshift(newItem);
+      saveState();
+      refreshMapMarkers(false);
+      renderSavedPlaces();
+      showToast(`➕ 已將「${p.name}」加入口袋名單！`);
+    }
+
+    function addPinnedToSelectedDay() {
+      const p = window._activePinnedPlace;
+      if (!p) return;
+      const dayObj = appState.itinerary.find(d => d.day === appState.selectedDay);
+      if (!dayObj) return;
+      dayObj.stops.push({
+        id: "stop-" + Date.now(),
+        name: p.name,
+        query: p.name,
+        lat: p.lat,
+        lng: p.lng,
+        stayMins: 60,
+        lockedTime: null,
+        tag: "地圖搜尋加入",
+        note: "由互動地圖搜尋釘選加入，已自動計算交通距離與時間。",
+        transportMode: "transit",
+        customTransit: null
+      });
+      dayObj.stops.forEach(s => delete s.overrideDepartMins);
+      saveState();
+      renderItineraryView();
+      refreshMapMarkers(false);
+      showToast(`✨ 已直接排入 Day ${dayObj.day} 並重算交通時間！`);
+    }
+
+    // =========================================================================
+    // 9. 分頁 3：口袋名單庫渲染與排入
+    // =========================================================================
+    function addPocketPlaceToDay(placeId, targetDay) {
+      const place = appState.pocketPlaces.find(p => p.id === placeId);
+      if (!place) return;
+      const dayNum = parseInt(targetDay, 10);
+      const dayObj = appState.itinerary.find(d => d.day === dayNum);
+      if (!dayObj) return;
+
+      const newStop = {
+        id: `pocket-${place.id}-${Date.now()}`,
+        name: place.name,
+        query: place.name,
+        lat: place.lat,
+        lng: place.lng,
+        stayMins: place.cat.includes("美食") || place.cat.includes("咖啡") ? 60 : 45,
+        lockedTime: null,
+        tag: place.cat,
+        note: place.note || `由口袋名單（${place.area}）排入，已自動計算交通與時間。`,
+        transportMode: "transit",
+        customTransit: null
+      };
+
+      if ((dayNum === 1 || dayNum === 6) && dayObj.stops.length > 1) {
+        dayObj.stops.splice(dayObj.stops.length - 1, 0, newStop);
+      } else {
+        dayObj.stops.push(newStop);
+      }
+      dayObj.stops.forEach(s => delete s.overrideDepartMins);
+      saveState();
+      renderItineraryView();
+      renderSavedPlaces();
+      if (appState.activeTab === "map") refreshMapMarkers(false);
+      showToast(`✨ 已將「${place.name}」排入 Day ${dayNum}！`);
+    }
+
+    function clearSavedSearch() {
+      document.getElementById("saved-search-input").value = "";
+      renderSavedPlaces();
+    }
+
+    const REGION_LABELS = ["全部", "大阪", "京都東山/祇園", "京都河原町", "京都嵐山", "宇治/奈良", "京都車站周邊"];
+
+    function matchRegionFilter(area, region) {
+      if (region === "全部") return true;
+      const a = area || "";
+      if (region === "大阪") return a.includes("大阪") || a.includes("臨空城");
+      if (region === "京都東山/祇園") return a.includes("東山") || a.includes("祇園") || a.includes("伏見");
+      if (region === "京都河原町") return a.includes("河原町");
+      if (region === "京都嵐山") return a.includes("嵐山") || a.includes("右京") || a.includes("龜岡");
+      if (region === "宇治/奈良") return a.includes("宇治") || a.includes("奈良");
+      if (region === "京都車站周邊") return a.includes("京都車站") || a.includes("洛北") || a.includes("貴船");
+      return true;
+    }
+
+    function renderSavedPlaces() {
+      const refLoc = getReferenceLocation();
+      document.getElementById("saved-total-count").textContent = appState.pocketPlaces.length;
+
+      document.getElementById("region-filter-pills").innerHTML = REGION_LABELS.map(r => `
+        <button onclick="appState.savedRegion='${r}'; renderSavedPlaces();" class="shrink-0 px-3 py-1 rounded-full text-[11px] font-bold border transition ${
+          appState.savedRegion === r ? "bg-slateDeep text-white border-slateDeep" : "bg-washi text-stone-600 border-stone-200 hover:border-slateDeep/40"
+        }">${r}</button>
+      `).join("");
+
+      document.getElementById("cat-filter-pills").innerHTML = CAT_LABELS.map(c => `
+        <button onclick="appState.savedCat='${c}'; renderSavedPlaces();" class="shrink-0 px-3 py-1.5 rounded-full text-xs font-bold border transition ${
+          appState.savedCat === c ? "bg-maple text-white border-maple" : "bg-stone-50 text-stone-600 border-stone-200"
+        }">${c}</button>
+      `).join("");
+
+      const kw = (document.getElementById("saved-search-input").value || "").trim().toLowerCase();
+      document.getElementById("saved-search-clear").classList.toggle("hidden", !kw);
+
+      let list = appState.pocketPlaces
+        .map(p => ({ ...p, distKm: calcDistanceKm(refLoc.lat, refLoc.lng, p.lat, p.lng) }))
+        .filter(p => {
+          const matchReg = matchRegionFilter(p.area, appState.savedRegion);
+          const matchCat = appState.savedCat === "全部" || p.cat === appState.savedCat;
+          const matchKw = !kw ||
+            p.name.toLowerCase().includes(kw) ||
+            p.cat.toLowerCase().includes(kw) ||
+            p.area.toLowerCase().includes(kw) ||
+            (p.note && p.note.toLowerCase().includes(kw));
+          return matchReg && matchCat && matchKw;
+        });
+
+      if (appState.savedSort === "distance") {
+        list.sort((a, b) => a.distKm - b.distKm);
+      } else {
+        list.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      }
+
+      document.getElementById("saved-filtered-count").textContent = `${list.length} 筆`;
+      const grid = document.getElementById("saved-places-grid");
+      if (list.length === 0) {
+        grid.innerHTML = `<div class="bg-white rounded-2xl p-8 text-center text-stone-400 text-sm border border-stone-200">找不到符合條件的口袋名單！</div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map(p => {
+        const bestDay = p.bestDay || guessSmartDayByCoords(p.lat, p.lng);
+        return `
+          <div class="bg-white rounded-2xl p-4 shadow-xs border border-stone-200/90 space-y-2.5">
+            <div class="flex items-start justify-between gap-2">
+              <div class="min-w-0 space-y-1">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="text-[10px] font-extrabold bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">📏 ${formatDist(p.distKm)}</span>
+                  <span class="text-[10px] font-bold bg-stone-100 text-stone-600 px-2 py-0.5 rounded-md">${p.area}</span>
+                  <span class="text-[10px] font-bold bg-washi text-stone-500 border border-stone-200 px-2 py-0.5 rounded-md">${p.cat}</span>
+                </div>
+                <h3 class="text-sm sm:text-base font-extrabold text-slateDeep leading-snug">${p.name}</h3>
+                <div class="flex items-center gap-2.5 text-xs">
+                  ${p.rating ? `<span class="font-bold text-amber-700">⭐ ${p.rating}</span>` : ""}
+                  ${p.price ? `<span class="text-stone-500 font-medium">${p.price}</span>` : ""}
+                </div>
+              </div>
+              <button onclick="flyToOnMap(${p.lat}, ${p.lng}, '${p.name.replace(/'/g, "\\'")}')" class="shrink-0 px-2.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-bold">
+                🗺️ 地圖位置
+              </button>
+            </div>
+
+            ${p.note ? `<div class="text-xs text-amber-950 bg-amber-50 border-l-4 border-ginkgo px-2.5 py-1.5 rounded-r-lg font-medium">📝 ${p.note}</div>` : ""}
+
+            <div class="flex items-center gap-2 pt-0.5">
+              <button onclick="addPocketPlaceToDay('${p.id}', ${bestDay})" class="flex-1 bg-maple hover:bg-mapleDark text-white text-xs font-bold py-2 px-3 rounded-xl transition shadow-xs">
+                ✨ 順路排入行程 (Day ${bestDay})
+              </button>
+              <select onchange="if(this.value){ addPocketPlaceToDay('${p.id}', this.value); this.value=''; }" class="bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold py-2 px-2.5 rounded-xl border border-stone-200 cursor-pointer">
+                <option value="">＋ 指定天數</option>
+                <option value="1">Day 1 (11/26)</option>
+                <option value="2">Day 2 (11/27)</option>
+                <option value="3">Day 3 (11/28)</option>
+                <option value="4">Day 4 (11/29)</option>
+                <option value="5">Day 5 (11/30)</option>
+                <option value="6">Day 6 (12/01)</option>
+              </select>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // =========================================================================
+    // 10. 分頁 4：捷星航空 GK50 / GK57 動態與延誤連動
+    // =========================================================================
+    function onOutboundDelayChange(val) {
+      const mins = parseInt(val, 10) || 0;
+      appState.flights.outbound.delay = mins;
+      const day1 = appState.itinerary.find(d => d.day === 1);
+      if (day1) {
+        const shifted = timeStrToMins(appState.flights.outbound.sched) + mins;
+        const hh = String(Math.floor((shifted % 1440) / 60)).padStart(2, "0");
+        const mm = String(shifted % 60).padStart(2, "0");
+        day1.startTime = `${hh}:${mm}`;
+        day1.stops.forEach(s => delete s.overrideDepartMins);
+      }
+      saveState();
+      renderFlightView();
+      renderItineraryView();
+    }
+
+    function onInboundDelayChange(val) {
+      appState.flights.inbound.delay = parseInt(val, 10) || 0;
+      saveState();
+      renderFlightView();
+    }
+
+    function saveChecklist() {
+      appState.checklist = {
+        lp1: document.getElementById("chk-lp-1").checked,
+        lp2: document.getElementById("chk-lp-2").checked,
+        lp3: document.getElementById("chk-lp-3").checked
+      };
+      saveState();
+    }
+
+    function renderFlightView() {
+      const out = appState.flights.outbound;
+      const inb = appState.flights.inbound;
+
+      document.getElementById("out-delay-slider").value = out.delay;
+      document.getElementById("out-delay-label").textContent = out.delay > 0 ? `+${out.delay} 分鐘（延誤）` : "0 分鐘（準點）";
+      const outArrMins = timeStrToMins(out.sched) + out.delay;
+      const outArrStr = minsToTimeStr(outArrMins);
+      document.getElementById("out-est-arrive-small").textContent = outArrStr;
+
+      const outBadge = document.getElementById("outbound-status-badge");
+      const outBox = document.getElementById("outbound-impact-box");
+      const banner = document.getElementById("flight-alert-banner");
+
+      if (out.delay > 0) {
+        outBadge.className = "text-xs font-bold px-2.5 py-1 rounded-full bg-red-100 text-maple";
+        outBadge.textContent = `延誤 +${out.delay}分｜${outArrStr}`;
+        banner.classList.remove("hidden");
+        document.getElementById("flight-alert-text").textContent = `捷星 GK50 延誤 +${out.delay} 分（預計 ${outArrStr} 抵關西），Day 1 已同步重算`;
+
+        outBox.className = "rounded-xl p-3.5 border border-red-200 bg-red-50/70 text-xs text-red-950 space-y-1.5";
+        outBox.innerHTML = `
+          <div class="font-extrabold text-maple">⚠️ Day 1 應變提醒（預計 ${minsToTimeStr(outArrMins + 70)} 出關）：</div>
+          ${out.delay > 60
+            ? `<p>• <strong>09:00 行李特工</strong>：延誤超過 60 分鐘，請縮短機場早餐時間，出關後直衝寄件櫃檯！</p>
+               <p>• <strong>12:00 牛舌的檸檬</strong>：若超過 09:45 才寄完行李，建議略過「大鳥大社」直接搭南海電鐵進難波用餐最保險。</p>`
+            : `<p>• 仍趕得上 09:00 行李特工寄件，稍微縮短機場早餐停留即可順接大鳥大社與 12:00 牛舌的檸檬。</p>`}
+        `;
+      } else {
+        outBadge.className = "text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800";
+        outBadge.textContent = "準點 06:30";
+        banner.classList.add("hidden");
+        outBox.className = "rounded-xl p-3.5 border border-emerald-200 bg-emerald-50/60 text-xs text-emerald-950";
+        outBox.innerHTML = `<strong>✅ GK50 準點：</strong>06:30 抵達 T1 ➔ 機場早餐 ➔ 09:00 行李特工寄件 ➔ 大鳥大社 ➔ 12:00 牛舌的檸檬。`;
+      }
+
+      document.getElementById("in-delay-slider").value = inb.delay;
+      document.getElementById("in-delay-label").textContent = inb.delay > 0 ? `+${inb.delay} 分鐘（延誤）` : "0 分鐘（準點）";
+      const inDepMins = timeStrToMins(inb.sched) + inb.delay;
+      const inDepStr = minsToTimeStr(inDepMins);
+      document.getElementById("in-est-dep-small").textContent = inDepStr;
+
+      const inBadge = document.getElementById("inbound-status-badge");
+      inBadge.className = inb.delay > 0
+        ? "text-xs font-bold px-2.5 py-1 rounded-full bg-red-100 text-maple"
+        : "text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800";
+      inBadge.textContent = inb.delay > 0 ? `延誤 +${inb.delay}分｜${inDepStr}` : "表定 23:30";
+
+      const recArrive = minsToTimeStr(inDepMins - 180);
+      document.getElementById("inbound-impact-box").innerHTML = `
+        <div class="font-bold text-slateDeep">🧳 關西機場報到與臨空城 Outlet 建議：</div>
+        <p>• 建議最晚 <strong>${recArrive}</strong>（起飛前 3 小時）抵達關西機場 T1 領取行李特工行李箱並辦理託運。</p>
+        ${inb.delay >= 45
+          ? `<p class="text-emerald-800 font-semibold">• ✨ 班機延誤 +${inb.delay} 分！臨空城 Outlet 商店開到 20:00、餐廳開到 21:00，您可以悠閒吃完晚餐再搭車去機場！</p>`
+          : `<p>• 臨空城 Outlet 商店營業至 20:00，打烊後坐 1 站電車（6 分鐘）進機場時間最剛好。</p>`}
+      `;
+
+      document.getElementById("chk-lp-1").checked = !!appState.checklist.lp1;
+      document.getElementById("chk-lp-2").checked = !!appState.checklist.lp2;
+      document.getElementById("chk-lp-3").checked = !!appState.checklist.lp3;
+    }
+
+    // =========================================================================
+    // 11. 即時匯率 API + 匯率／10% 退稅彈窗
+    // =========================================================================
+    async function fetchLiveExchangeRate(manual = false) {
+      try {
+        const res = await fetch("https://open.er-api.com/v6/latest/JPY");
+        const data = await res.json();
+        if (data?.rates?.TWD) {
+          appState.exchangeRate = Number(data.rates.TWD.toFixed(4));
+          const t = new Date().toLocaleTimeString("zh-TW", { hour: "2-digit", minute: "2-digit" });
+          appState.rateSource = `即時市場匯率（${t} 更新）`;
+          saveState();
+          updateHeaderRatePill();
+          renderItineraryView();
+          if (manual) showToast(`已更新匯率：1 JPY = ${appState.exchangeRate} TWD`);
+          return;
+        }
+      } catch (e) {
+        console.warn("匯率取得失敗，使用離線預設值", e);
+      }
+      appState.rateSource = "離線基準匯率 0.215（可手動微調）";
+      updateHeaderRatePill();
+    }
+
+    function updateHeaderRatePill() {
+      const el = document.getElementById("header-rate-pill");
+      if (el) el.textContent = `1¥≈${appState.exchangeRate.toFixed(3)}元`;
+    }
+
+    function openCurrencyModal() {
+      openModal(
+        "💴 日幣 ⇄ 台幣即時換算 & 10% 退稅",
+        `
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-[11px] bg-amber-50 p-2.5 rounded-xl border border-amber-200">
+              <span class="font-bold text-amber-950">${appState.rateSource}</span>
+              <button onclick="fetchLiveExchangeRate(true).then(openCurrencyModal)" class="underline font-extrabold text-maple">重新抓取</button>
+            </div>
+            <div class="flex items-center justify-between gap-2 text-xs">
+              <span class="font-bold text-stone-600">套用匯率 (1 JPY =)</span>
+              <input type="number" id="m-rate" step="0.0001" value="${appState.exchangeRate}" oninput="onModalRateEdit()" class="w-24 text-right rounded-lg border border-stone-300 px-2 py-1 font-extrabold text-slateDeep" />
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-[11px] font-bold text-stone-500 mb-1">日幣 (JPY ¥)</label>
+                <input type="number" id="m-jpy" value="10000" oninput="onModalJPYInput()" class="w-full rounded-xl border-2 border-stone-300 focus:border-maple px-3 py-2 text-lg font-extrabold text-slateDeep" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-stone-500 mb-1">台幣 (NT$)</label>
+                <input type="number" id="m-twd" value="${Math.round(10000 * appState.exchangeRate)}" oninput="onModalTWDInput()" class="w-full rounded-xl border-2 border-stone-300 focus:border-ginkgo px-3 py-2 text-lg font-extrabold text-maple" />
+              </div>
+            </div>
+            <div class="grid grid-cols-4 gap-1.5">
+              <button onclick="setModalJPY(1000)" class="py-1.5 rounded-lg bg-stone-100 text-xs font-bold">¥1,000</button>
+              <button onclick="setModalJPY(3000)" class="py-1.5 rounded-lg bg-stone-100 text-xs font-bold">¥3,000</button>
+              <button onclick="setModalJPY(5500)" class="py-1.5 rounded-lg bg-stone-100 text-xs font-bold">¥5,500</button>
+              <button onclick="setModalJPY(10000)" class="py-1.5 rounded-lg bg-stone-100 text-xs font-bold">¥10,000</button>
+            </div>
+            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 space-y-0.5">
+              <div class="font-extrabold text-emerald-800 text-xs">🛍️ 日本 10% 退稅後實付試算（滿 ¥5,500）</div>
+              <div id="m-taxfree" class="text-xs font-bold text-emerald-950"></div>
+            </div>
+          </div>
+        `,
+        `<button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-maple text-white text-xs font-bold">完成</button>`
+      );
+      onModalJPYInput();
+    }
+
+    function onModalRateEdit() {
+      const r = parseFloat(document.getElementById("m-rate")?.value);
+      if (r && r > 0) {
+        appState.exchangeRate = r;
+        appState.rateSource = "自訂匯率";
+        saveState();
+        updateHeaderRatePill();
+        renderItineraryView();
+        onModalJPYInput();
+      }
+    }
+
+    function onModalJPYInput() {
+      const jpy = parseFloat(document.getElementById("m-jpy")?.value) || 0;
+      const twdEl = document.getElementById("m-twd");
+      const tfEl = document.getElementById("m-taxfree");
+      if (twdEl) twdEl.value = Math.round(jpy * appState.exchangeRate);
+      const tfJpy = Math.round(jpy / 1.1);
+      const tfTwd = Math.round(tfJpy * appState.exchangeRate);
+      if (tfEl) tfEl.textContent = `實付約 ¥${tfJpy.toLocaleString()}（約 NT$ ${tfTwd.toLocaleString()}）`;
+    }
+
+    function onModalTWDInput() {
+      const twd = parseFloat(document.getElementById("m-twd")?.value) || 0;
+      const jpyEl = document.getElementById("m-jpy");
+      if (jpyEl) jpyEl.value = Math.round(twd / appState.exchangeRate);
+      const jpy = parseFloat(jpyEl?.value) || 0;
+      const tfJpy = Math.round(jpy / 1.1);
+      const tfEl = document.getElementById("m-taxfree");
+      if (tfEl) tfEl.textContent = `實付約 ¥${tfJpy.toLocaleString()}（約 NT$ ${Math.round(tfJpy * appState.exchangeRate).toLocaleString()}）`;
+    }
+
+    function setModalJPY(v) {
+      const el = document.getElementById("m-jpy");
+      if (el) { el.value = v; onModalJPYInput(); }
+    }
+
+    // =========================================================================
+    // 12. 導覽分頁、Toast、Modal、匯出與重設
+    // =========================================================================
+    function switchTab(tabName) {
+      appState.activeTab = tabName;
+      ["itinerary", "map", "saved", "flight"].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.toggle("hidden", t !== tabName);
+        const btn = document.getElementById(`nav-${t}`);
+        if (t === tabName) {
+          btn.classList.remove("text-stone-500", "font-medium");
+          btn.classList.add("text-maple", "font-extrabold");
+        } else {
+          btn.classList.remove("text-maple", "font-extrabold");
+          btn.classList.add("text-stone-500", "font-medium");
+        }
+      });
+
+      if (tabName === "map") {
+        setTimeout(() => {
+          initLeafletMap();
+          leafletMap.invalidateSize();
+          refreshMapMarkers(true);
+        }, 120);
+      } else if (tabName === "saved") {
+        renderSavedPlaces();
+      } else if (tabName === "flight") {
+        renderFlightView();
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("toast-message");
+      el.textContent = msg;
+      el.classList.remove("hidden", "opacity-0");
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        el.classList.add("opacity-0");
+        setTimeout(() => el.classList.add("hidden"), 300);
+      }, 2400);
+    }
+
+    function openModal(title, bodyHtml, actionsHtml) {
+      document.getElementById("modal-title").textContent = title;
+      document.getElementById("modal-body").innerHTML = bodyHtml;
+      document.getElementById("modal-actions").innerHTML = actionsHtml;
+      document.getElementById("custom-modal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("custom-modal").classList.add("hidden");
+    }
+
+    function exportItineraryText() {
+      const txt = appState.itinerary.map(d => {
+        const sch = computeDaySchedule(d);
+        const lines = sch.items.map((it, i) => `  ${i + 1}. [${minsToTimeStr(it.arriveMins)}–${minsToTimeStr(it.departMins)}] ${it.stop.name}`).join("\n");
+        return `【Day ${d.day}｜${d.date}】${d.title}\n${lines}`;
+      }).join("\n\n");
+
+      openModal(
+        "📋 複製「逸祥一休尼京都狗勾」6 天行程",
+        `<textarea id="export-ta" rows="9" readonly class="w-full rounded-xl border border-stone-300 p-2.5 text-xs bg-stone-50 font-mono">${txt}</textarea>`,
+        `<button onclick="closeModal()" class="px-3.5 py-2 rounded-xl border border-stone-300 text-xs font-medium">關閉</button>
+         <button onclick="copyExportTa()" class="px-4 py-2 rounded-xl bg-slateDeep text-white text-xs font-bold">一鍵複製</button>`
+      );
+    }
+
+    function copyExportTa() {
+      const ta = document.getElementById("export-ta");
+      ta.select();
+      document.execCommand("copy");
+      closeModal();
+      showToast("已複製完整 6 天行程至剪貼簿！");
+    }
+
+    function confirmResetModal() {
+      openModal(
+        "重設回預設 6 天行程？",
+        "<p>將恢復為最初定案的 11/26–12/1 行程與時間（您的口袋名單與航班設定不受影響）。</p>",
+        `<button onclick="closeModal()" class="px-3.5 py-2 rounded-xl border border-stone-300 text-xs font-medium">取消</button>
+         <button onclick="doResetItinerary()" class="px-4 py-2 rounded-xl bg-maple text-white text-xs font-bold">確定重設</button>`
+      );
+    }
+
+    function doResetItinerary() {
+      appState.itinerary = JSON.parse(JSON.stringify(DEFAULT_ITINERARY));
+      saveState();
+      closeModal();
+      renderItineraryView();
+      showToast("已重設回預設 6 天行程");
+    }
+
+    // =========================================================================
+    // 13. 啟動初始化
+    // =========================================================================
+    window.addEventListener("DOMContentLoaded", () => {
+      loadState();
+      updateLiveClocks();
+      setInterval(updateLiveClocks, 1000);
+      updateHeaderRatePill();
+      renderFlightView();
+      renderItineraryView();
+      fetchLiveExchangeRate(false);
+    });
+  </script>
+</body>
+</html>
